@@ -2,7 +2,6 @@
 /**
  * @SWG\Definition(
  *  required={
- *      "name",
  *      "name"
  *   }
  *  )
@@ -23,7 +22,7 @@ class Brewery {
     
     /**
      * @SWG\Property()
-     * @var location
+     * @var string
      */
     public $location;
     
@@ -57,7 +56,12 @@ class Brewery {
             if (sizeof($results) > 1){
                 throw new Exception("Multiple instances of the brewery ".$brew['name']." found", 500);
             }
-            $brewery = Brewery::create($brew['name']);
+            if (isset($brew['location'])){
+                $brewery = Brewery::create($brew['name']);
+            } else {
+                $brewery = Brewery::create($brew['name'], $brew['location']);
+            }
+            
         } else {
             $brewery = new Brewery($results[0]);
         }

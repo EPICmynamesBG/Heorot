@@ -4,12 +4,12 @@
  * @SWG\Swagger(
  *   schemes={"http"},
  *   host="localhost:8888",
- *   basePath="/backend/public",
+ *   basePath="/Heorot/backend/public",
  *   consumes={"application/json"},
  *   produces={"application/json"},
  *   @SWG\Info(
- *     title="IoT Research Form",
- *     description="A reseach data collection form",
+ *     title="Heorot",
+ *     description="Searchable drink database",
  *     version="1.0.0",
  *     @SWG\Contact(name="Brandon Groff", email="mynamesbg@gmail.com"),
  * 	   @SWG\License(name="MIT", url="https://opensource.org/licenses/MIT")
@@ -28,9 +28,9 @@ if (PHP_SAPI == 'cli-server') {
     }
 }
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require __DIR__ . '/../vendor/autoload.php';
 

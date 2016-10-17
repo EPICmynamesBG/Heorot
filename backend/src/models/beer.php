@@ -1,9 +1,11 @@
 <?php
+
+require_once "brewery.php";
 /**
  * @SWG\Definition(
  *  required={
  *      "name",
- *      "brewery_id",
+ *      "brewery",
  *      "cost"
  *   }
  *  )
@@ -36,9 +38,9 @@ class Beer {
     
     /**
      * @SWG\Property()
-     * @var int
+     * @var Brewery
      */
-    public $brewery_id;
+    public $brewery;
     
     /**
      * @SWG\Property()
@@ -63,7 +65,13 @@ class Beer {
         $this->name = $data['name'];
         $this->size = $data['size'];
         $this->ibu = $data['ibu'];
-        $this->brewery_id = $data['brewery_id'];
+        if (isset($data['brewery_id'])){
+            $this->brewery = Brewery::getById($data['brewery_id']);
+        } else if (isset($data['brewery']['id'])){
+            $this->brewery = Brewery::getById($data['brewery']['id']);
+        } else {
+            throw new Exception('Brewery not provided', 500);
+        }
         $this->abv = $data['ibv'];
         $this->description = $dta['description'];
         $this->cost = $data['cost'];
@@ -74,10 +82,10 @@ class Beer {
         $arr = array(
             'name' => $name,
             'size' => $size,
-            'ibu' => intval($ibu),
+            'ibu' => $ibu != null ? intval($ibu):null,
             'brewery_id' => $brewery->id,
-            'abv' => floatval($abv),
-            'description' => $description
+            'abv' => $abv != null ? floatval($abv):null,
+            'description' => $description,
             'cost' => $cost
         );
         
@@ -87,7 +95,39 @@ class Beer {
     }
     
     public static function findOrCreate($beer) {
+        $db = DB::getInstance();
+        $results = $db->select('Beer','*',[
+            'name[~]' => $beer['name']
+        ]);
         
+        $newbeer = null;
+        
+        if (sizeof($results) != 1 || !$results){
+            if (sizeof($results) > 1){
+                throw new Exception("Multiple instances of the beer ".$beer['name']." found", 500);
+            }
+            $brewery = Brewery::getById($beer['brewery']['id']);
+            if ($brewery == null){
+                $brewery = Brewery::findOrCreate($beer['brewery']);
+            }
+            
+            $newbeer = Beer::create($beer['name'], 
+                                    $beer['size'], 
+                                    $beer['ibu'], 
+                                    $brewery,
+                                    $beer['abv'], 
+                                    $beer['description'], 
+                                    $beer['cost']);
+            
+        } else {
+            $newbeer = new Beer($results[0]);
+        }
+        
+        if ($newbeer == null){
+            throw new Exception("An error occured finding/creating the brewery", 500);
+        }
+        
+        return $newbeer;
     }
     
     public static function getById($beerId) {
