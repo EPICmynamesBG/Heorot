@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IoT Security</title>
+    <!--    <link rel="shortcut icon" href="./images/icon_32.png" />-->
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--  StyleSheets  -->
+    <link href="./node_modules/materialize-css/dist/css/materialize.css" rel="stylesheet" />
+    <link href="./styles/global.css" rel="stylesheet" />
+
+    <!--  Source Files  -->
+    <script src="./node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="./node_modules/materialize-css/dist/js/materialize.js" type="text/javascript"></script>
+    <script src="./node_modules/angular/angular.js" type="text/javascript"></script>
+    <script src="./node_modules/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
+
+
+    <!--  App Files -->
+    <script src="./scripts/app.js" type="text/javascript"></script>
+
+    <script src="./scripts/directives/ngEnter.js" type="text/javascript"></script>
+
+    <script src="./scripts/factories/API.js" type="text/javascript"></script>
+
+    <script src="./scripts/controllers/CreateController.js" type="text/javascript"></script>
+    <script src="./scripts/controllers/MainController.js" type="text/javascript"></script>
+    <script src="./scripts/controllers/SearchController.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper amber">
+            <a ui-sref="main" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
+                <li ui-sref-active="active"><a ui-sref="create">Create</a></li>
+                <li ui-sref-active="active"><a ui-sref="search">Search</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div ui-view></div>
+    <footer class="page-footer amber darken-3">
+        <div class="footer-copyright">
+            <div class="container center">
+                &copy; 2016 Copyright <a class="grey-text text-lighten-4" href="http://mynamesbg.me" target="_blank">Brandon Groff</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

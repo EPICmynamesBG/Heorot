@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/beer.php";
+require_once __DIR__ . "/../models/brewery.php";
 
 /**
 * @SWG\Get(
@@ -66,6 +67,12 @@ $app->get('/beer/{id}', function ($request, $response, $args) {
         throw new Exception("Missing parameter: Id", 400);
     }
     $beer = Beer::getById($args['id']);
+    if ($beer != null){
+        $beer->addExtendedInfo();
+    } else {
+        throw new Exception("Beer with id ". $args['id'] . " not found", 400);
+    }
+    
     $out = new Response($beer);
     return $response->getBody()->write(json_encode($out));
 });
@@ -81,7 +88,7 @@ $app->get('/beer/{id}', function ($request, $response, $args) {
 *        in="body",
 *        description="Observation JSON Body",
 *        required=true,
-*        @SWG\Schema(ref="#/definitions/PostBody")
+*        @SWG\Schema(ref="#/definitions/BeerPostBody")
 *     ),
 *     @SWG\Response(
 *         response=200,
@@ -102,8 +109,8 @@ $app->get('/beer/{id}', function ($request, $response, $args) {
 
 $app->post('/beer', function ($request, $response, $args) {
     $body = $request->getParsedBody();
-    
-    $beer = Beer::create($body);
+        
+    $beer = Beer::findOrCreate($body);
     $output = new Response($beer);
     
     return $response->getBody()->write(json_encode($output));

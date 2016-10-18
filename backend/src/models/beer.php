@@ -1,6 +1,7 @@
 <?php
 
 require_once "brewery.php";
+require_once __DIR__ . "/../util/breweryDB.php";
 /**
  * @SWG\Definition(
  *  required={
@@ -60,11 +61,17 @@ class Beer {
      */
     public $cost;
     
+    /**
+     * @SWG\Property()
+     * @var object
+     */
+    public $extendedInfo;
+    
     function __construct($data) {
         $this->id = $data['id'];
         $this->name = $data['name'];
         $this->size = $data['size'];
-        $this->ibu = $data['ibu'];
+        $this->ibu = intval($data['ibu']);
         if (isset($data['brewery_id'])){
             $this->brewery = Brewery::getById($data['brewery_id']);
         } else if (isset($data['brewery']['id'])){
@@ -72,9 +79,15 @@ class Beer {
         } else {
             throw new Exception('Brewery not provided', 500);
         }
-        $this->abv = $data['ibv'];
-        $this->description = $dta['description'];
-        $this->cost = $data['cost'];
+        $this->abv = floatval($data['abv']);
+        $this->description = $data['description'];
+        $this->cost = floatval($data['cost']);
+        $this->extendedInfo = null;
+    }
+    
+    function addExtendedInfo() {
+        $brewDB = new BreweryDB();
+        $this->extendedInfo = $brewDB->getInfoForBeer($this->name);
     }
     
     public static function create($name, $size = null, $ibu = null, $brewery, $abv = null, $description = null, $cost) {
@@ -82,11 +95,11 @@ class Beer {
         $arr = array(
             'name' => $name,
             'size' => $size,
-            'ibu' => $ibu != null ? intval($ibu):null,
+            'ibu' => intval($ibu),
             'brewery_id' => $brewery->id,
-            'abv' => $abv != null ? floatval($abv):null,
+            'abv' => floatval($abv),
             'description' => $description,
-            'cost' => $cost
+            'cost' => floatval($cost)
         );
         
         $beer_id = $db->insert("Beer", $arr);
@@ -118,7 +131,6 @@ class Beer {
                                     $beer['abv'], 
                                     $beer['description'], 
                                     $beer['cost']);
-            
         } else {
             $newbeer = new Beer($results[0]);
         }

@@ -9,6 +9,9 @@
   "author": "Brandon Groff",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.5.8"
+    "angular": "^1.5.8",
+    "angular-materialize": "^0.2.1",
+    "angular-ui-router": "^0.3.1",
+    "materialize-css": "^0.97.7"
   }
 }

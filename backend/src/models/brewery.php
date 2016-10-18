@@ -26,10 +26,22 @@ class Brewery {
      */
     public $location;
     
+    /**
+     * @SWG\Property()
+     * @var object
+     */
+    public $extendedInfo;
+    
     function __construct($data) {
-        $this->id = $data['id'];
+        $this->id = intval($data['id']);
         $this->name = $data['name'];
         $this->location = $data['location'];
+        $this->extendedInfo = null;
+    }
+    
+    function addExtendedInfo() {
+        $brewDB = new BreweryDB();
+        $this->extendedInfo = $brewDB->getInfoForBrewery($this->name);
     }
     
     public static function create($name, $location = null) {
@@ -46,6 +58,7 @@ class Brewery {
     
     public static function findOrCreate($brew) {
         $db = DB::getInstance();
+        
         $results = $db->select('Brewery','*',[
             'name[~]' => $brew['name']
         ]);
@@ -56,12 +69,13 @@ class Brewery {
             if (sizeof($results) > 1){
                 throw new Exception("Multiple instances of the brewery ".$brew['name']." found", 500);
             }
-            if (isset($brew['location'])){
+            
+            if (!isset($brew['location'])){
                 $brewery = Brewery::create($brew['name']);
             } else {
                 $brewery = Brewery::create($brew['name'], $brew['location']);
             }
-            
+            return;
         } else {
             $brewery = new Brewery($results[0]);
         }

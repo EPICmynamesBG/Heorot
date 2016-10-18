@@ -58,15 +58,18 @@ CREATE TABLE `Brewery` (
 --
 -- Indexes for table `Beer`
 --
+
 ALTER TABLE `Beer`
   ADD PRIMARY KEY (`id`),
+  MODIFY COLUMN `id` int(11) AUTO_INCREMENT,
   ADD KEY `fk_Brewery` (`brewery_id`);
 
 --
 -- Indexes for table `Brewery`
 --
 ALTER TABLE `Brewery`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  MODIFY COLUMN `id` int(11) AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
