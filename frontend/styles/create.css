@@ -1,12 +1,24 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .input-field input,
-.input-field label,
 .input-field input:focus,
-.input-field label.active{
+textarea.materialize-textarea {
   color: #ffc107 !important;
   border-color: #ffc107 !important;
 }
 
-.input-field input:focus:not([readonly]){
+.input-field label,
+.input-field label.active {
+  color: #ffa000 !important;
+  border-color: #ffa000 !important;
+}
+
+.input-field input:focus:not([readonly]),
+textarea.materialize-textarea:focus {
   box-shadow: 0 1px 0 0 #ffc107 !important;
 }
 
@@ -20,4 +32,15 @@
   color: #c62828 !important;
   border-color: #c62828 !important;
   box-shadow: 0 1px 0 0 #c62828 !important;
+}
+
+.input-field .tooltipped {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  cursor: default;
+}
+
+.material-tooltip .backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
 }

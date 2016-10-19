@@ -68,6 +68,10 @@ loading {
   vertical-align: top;
 }
 
+.text-amber {
+  color: #ffc107;
+}
+
 .side-nav li > a > i.material-icons {
   float: none;
   display: inline-block;

@@ -6,32 +6,68 @@
 </div>
 <div class="section white">
   <div class="row container">
-    <form class="col s12 m6" novalidate ng-init="newBeer = {}" name="CreateBeer">
+    <form novalidate ng-init="newBeer = {}" name="CreateBeer">
       <div class="row">
         <div class="input-field col s12">
           <input id="name" ng-model="newBeer.name" type="text" class="validate" autocomplete="off" required>
           <label for="name">Name</label>
+          <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Budweiser"><i class="material-icons small text-amber">info</i></a>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="cost" ng-model="newBeer.cost" type="number" class="validate" autocomplete="off" required step="any">
+          <input id="cost" ng-model="newBeer.cost" type="number" class="validate" autocomplete="off" required step="0.01" min="0">
           <label for="cost">Cost</label>
+          <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: $4.75"><i class="material-icons small text-amber">info</i></a>
         </div>
       </div>
+      <div class="divider"></div>
       <div class="section">
         <h4 class="header">Brewery</h4>
         <div class="row">
           <div class="input-field col s12" ng-init="newBeer.brewery = {}">
             <input id="brew-name" ng-model="newBeer.brewery.name" type="text" class="validate" autocomplete="off" required>
             <label for="brew-name">Name</label>
+            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Anheuser-Busch"><i class="material-icons small text-amber">info</i></a>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12" ng-init="newBeer.brewery = {}">
             <input id="brew-location" ng-model="newBeer.brewery.location" type="text" class="validate" autocomplete="off">
-            <label for="brew-location">Location</label>
+            <label for="brew-location">Location (Optional)</label>
+            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: St. Louis, MO"><i class="material-icons small text-amber">info</i></a>
           </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="ibu" ng-model="newBeer.ibu" type="number" class="validate" autocomplete="off" step="1" min="0">
+          <label for="ibu">IBU (Optional)</label>
+          <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="International Bitterness Unit. Ex: 60"><i class="material-icons small text-amber">info</i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="ibu" ng-model="newBeer.abv" type="number" class="validate" autocomplete="off" step="0.1" min="0">
+          <label for="ibu">ABV (Optional)</label>
+          <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Alcohol by Volume. Ex: 5.5%"><i class="material-icons small text-amber">info</i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="description" class="materialize-textarea" ng-enter="submit()"></textarea>
+          <label for="description">Beer Description</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button class="btn red darken-1 waves-effect waves-light left" type="reset" name="reset">Reset
+            <i class="material-icons left">clear</i>
+          </button>
+          <button class="btn teal darken-1 waves-effect waves-light right" type="submit" ng-click="submit()" ng-disabled="CreateBeer.$invalid" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
         </div>
       </div>
     </form>
