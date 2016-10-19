@@ -1,31 +1,89 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway:200,400,700&subset=latin-ext';
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Raleway', sans-serif;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  box-sizing: border-box;
 }
 
 html {
-    overflow: hidden;
-    height: 100%;
+  overflow: hidden;
+  height: 100%;
 }
 
 body {
-    background-color: #eceff1;
-    height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+  background-color: #eceff1;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Sticky Footer */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+
+/* Sticky Footer */
+
+main {
+  flex: 1 0 auto;
+}
+
+nav .brand-logo {
+  font-size: 3.5rem;
+}
+
+nav ul,
+nav ul > li{
+  height: 100%;
+}
+
+nav input#search {
+  width: 260px;
+}
+
+nav .button-collapse {
+  margin-left: 32px;
+}
+
+*[ng-click] {
+  cursor: pointer;
+}
+
+loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.side-nav li > a > i.text {
+  line-height: 48px;
+  float: none;
+  display: inline-block;
+  font-family: 'Raleway';
+  color: #212121;
+  font-style: normal;
+  font-size: 1rem;
+  vertical-align: top;
+}
+
+.side-nav li > a > i.material-icons {
+  float: none;
+  display: inline-block;
+  width:24px;
+  line-height: 48px;
+  height: 48px;
 }
 
 a.button-collapse {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .parallax-container {
-    height: 250px;
+  height: 250px;
 }
 
 footer.page-footer {
-    margin-top: 0;
+  margin-top: 0;
 }

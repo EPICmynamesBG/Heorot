@@ -1,0 +1,39 @@
+<div class="section white">
+  <div class="row container">
+    <h2 class="header">Add a Beer &#127866;</h2>
+    <p class="grey-text text-darken-3 lighten-3">The Heorot have something new that's not here? Add it! Just fill out the form below with as much information as you can, as given from The Heorot's menu.</p>
+  </div>
+</div>
+<div class="section white">
+  <div class="row container">
+    <form class="col s12 m6" novalidate ng-init="newBeer = {}" name="CreateBeer">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="name" ng-model="newBeer.name" type="text" class="validate" autocomplete="off" required>
+          <label for="name">Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="cost" ng-model="newBeer.cost" type="number" class="validate" autocomplete="off" required step="any">
+          <label for="cost">Cost</label>
+        </div>
+      </div>
+      <div class="section">
+        <h4 class="header">Brewery</h4>
+        <div class="row">
+          <div class="input-field col s12" ng-init="newBeer.brewery = {}">
+            <input id="brew-name" ng-model="newBeer.brewery.name" type="text" class="validate" autocomplete="off" required>
+            <label for="brew-name">Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12" ng-init="newBeer.brewery = {}">
+            <input id="brew-location" ng-model="newBeer.brewery.location" type="text" class="validate" autocomplete="off">
+            <label for="brew-location">Location</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

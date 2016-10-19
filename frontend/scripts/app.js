@@ -11,6 +11,7 @@ app.constant('config', {
 app.run(function($rootScope, config, $state) {
     $rootScope.config = config;
     $rootScope.$state = $state;
+    $rootScope.loading = false;
     $(".button-collapse").sideNav();
 });
 

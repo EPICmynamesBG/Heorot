@@ -1,0 +1,23 @@
+.input-field input,
+.input-field label,
+.input-field input:focus,
+.input-field label.active{
+  color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+.input-field input:focus:not([readonly]){
+  box-shadow: 0 1px 0 0 #ffc107 !important;
+}
+
+.input-field input.valid
+{
+  box-shadow: 0 1px 0 0 #ffc107 !important;
+}
+
+.input-field input.invalid
+{
+  color: #c62828 !important;
+  border-color: #c62828 !important;
+  box-shadow: 0 1px 0 0 #c62828 !important;
+}
