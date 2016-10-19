@@ -8,8 +8,10 @@ app.constant('config', {
     url: devURL
 });
 
-app.run(function($rootScope, config) {
+app.run(function($rootScope, config, $state) {
     $rootScope.config = config;
+    $rootScope.$state = $state;
+    $(".button-collapse").sideNav();
 });
 
 
@@ -20,19 +22,19 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
-        .state('main', {
+        .state('Home', {
             url: '/',
             templateUrl: "html/main.html",
             controller: 'MainController',
             data: {}
         })
-        .state('search', {
+        .state('Search', {
             url: "/search",
             templateUrl: "html/search.html?beer&brewery",
             controller: 'SearchController',
             data: {}
         })
-        .state('create', {
+        .state('Create', {
             url: "/create",
             templateUrl: "html/create.html",
             controller: 'CreateController',
