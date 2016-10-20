@@ -21,6 +21,13 @@
           <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: $4.75"><i class="material-icons small text-amber">info</i></a>
         </div>
       </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="size" ng-model="newBeer.size" type="text" class="validate" autocomplete="off">
+          <label for="size"  data-error="Input Invalid">Size (Optional)</label>
+          <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: draught pint or 12oz"><i class="material-icons small text-amber">info</i></a>
+        </div>
+      </div>
       <div class="divider"></div>
       <div class="section">
         <h4 class="header">Brewery</h4>
@@ -56,7 +63,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="description" class="materialize-textarea" ng-enter="submit()"></textarea>
+          <textarea id="description" class="materialize-textarea" ng-enter="submit()" ng-model="beer.description"></textarea>
           <label for="description"  data-error="Input Invalid">Beer Description</label>
         </div>
       </div>

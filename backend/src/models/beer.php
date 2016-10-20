@@ -119,9 +119,9 @@ class Beer {
             if (sizeof($results) > 1){
                 throw new Exception("Multiple instances of the beer ".$beer['name']." found", 500);
             }
-            $brewery = Brewery::getById($beer['brewery']['id']);
+            $brewery = Brewery::findOrCreate($beer['brewery']);
             if ($brewery == null){
-                $brewery = Brewery::findOrCreate($beer['brewery']);
+                throw new Exception("An error occured finding/creating the brewery ".$beer['brewery']['name'], 500);
             }
             
             $newbeer = Beer::create($beer['name'], 
