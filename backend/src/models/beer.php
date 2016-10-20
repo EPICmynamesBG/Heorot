@@ -161,16 +161,41 @@ class Beer {
         $results = $db->select('Beer','*',[]);
         
         if (sizeof($results) == 0 || !$results){
-			return array();
-		}
+          return array();
+        }
         $beers = array();
         
         for ($i=0; $i < sizeof($results); $i++){
             $b = new Beer($results[$i]);
             array_push($beers, $b);
-		}
+		    }
         
         return $beers;
+    }
+    
+    public static function search($name) {
+        $db = DB::getInstance();
+        $results = $db->select('Beer','*',[
+            'name[~]' => $name,
+            "ORDER" => "name",
+        ]);
+        
+        if (sizeof($results) == 0 || !$results){
+          return array();
+        }
+        $beers = array();
+        
+        for ($i=0; $i < sizeof($results); $i++){
+            $b = new Beer($results[$i]);
+            $obj = array(
+                'type'=> 'beer',
+                'beer'=> $b
+            );
+            array_push($beers, $obj);
+		    }
+        
+        return $beers;
+        
     }
     
 }

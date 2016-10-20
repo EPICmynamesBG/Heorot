@@ -117,5 +117,30 @@ class Brewery {
         
         return $brews;
     }
+  
+    public static function search($name) {
+        $db = DB::getInstance();
+        $results = $db->select('Brewery','*',[
+            'name[~]' => $name,
+            "ORDER" => "name",
+        ]);
+        
+        if (sizeof($results) == 0 || !$results){
+          return array();
+        }
+        $brews = array();
+        
+        for ($i=0; $i < sizeof($results); $i++){
+            $b = new Brewery($results[$i]);
+            $obj = array(
+                'type'=> 'brewery',
+                'brewery'=> $b
+            );
+            array_push($brews, $obj);
+		    }
+        
+        return $brews;
+        
+    }
     
 }

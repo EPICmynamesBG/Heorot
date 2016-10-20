@@ -8,3 +8,4 @@ $app->get('/', function ($request, $response, $args) {
 });
 require __DIR__ . "/routes/brewery.php";
 require __DIR__ . "/routes/beer.php";
+require __DIR__ . "/routes/search.php";
