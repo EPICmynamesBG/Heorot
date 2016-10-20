@@ -37,7 +37,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: "/search?beer&brewery",
       templateUrl: "html/search.html",
       controller: 'SearchController',
-      data: {}
+      data: {
+        showModal: false,
+        modalBeerId: -1
+      }
     })
     .state('Create', {
       url: "/create",
