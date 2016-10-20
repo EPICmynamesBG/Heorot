@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ui.router']);
 
-//var prodURL = 'http://bgroff-pi2.dhcp.bsu.edu/backend/public';
+var prodURL = 'http://bgroff-pi2.dhcp.bsu.edu/Heorot/backend/public';
 var devURL = 'http://localhost:8888/Heorot/backend/public';
 
 app.constant('config', {
