@@ -1,0 +1,80 @@
+<div id="beer-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>{{data.name}}</h4>
+    <span class="modal-beer-logo" ng-if="data.extendedInfo.labels.medium">
+      <img ng-src="{{data.extendedInfo.labels.medium}}" />
+    </span>
+    <div class="divider"></div>
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">public</i>General</div>
+        <div class="collapsible-body">
+          <p ng-if="data.description">{{data.description}}</p>
+          <p ng-if="!data.description">{{data.extendedInfo.description}}</p>
+          <div class="row">
+            <div class="col s6">
+              <p><b>Cost:</b> ${{data.cost}}</p>
+              <p ng-if="data.size"><b>Size:</b> {{data.size}}</p>
+              <p ng-if="!data.size"><b>Size:</b> Not Provided</p>
+            </div>
+            <div class="col s6">
+              <p ng-if="data.ibu || data.ibu === 0"><b>IBU:</b> {{data.ibu}}</p>
+              <p ng-if="!data.ibu && data.ibu !== 0"><b>IBU:</b> Not Provided</p>
+              <p ng-if="data.abv || data.ibv === 0"><b>ABV:</b> {{data.abv}}%</p>
+              <p ng-if="!data.abv && data.ibv !== 0"><b>ABV:</b> {{data.extendedInfo.abv}}%</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">domain</i>Brewery</div>
+        <div class="collapsible-body">
+          <div class="row">
+            <div class="col s6">
+              <p class="important-text">{{data.brewery.name}}</p>
+            </div>
+            <div class="col s6">
+              <p ng-if="data.brewery.location"><b>Location:</b> {{data.brewery.location}}</p>
+              <p ng-if="!data.brewery.location"><b>Location:</b> Not Provided</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li ng-if="data.extendedInfo">
+        <div class="collapsible-header"><i class="material-icons">note_add</i>Additional Info<i class="right info">Provided by BreweryDB</i></div>
+        <div class="collapsible-body">
+          <div class="row">
+            <h4>Style</h4>
+            <p><b>{{data.extendedInfo.style.name}}</b></p>
+            <p>{{data.extendedInfo.style.description}}</p>
+            <div class="col s6">
+              <p><b>IBU Range:</b> {{data.extendedInfo.style.ibuMin}} - {{data.extendedInfo.style.ibuMax}}</p>
+            </div>
+            <div class="col s6">
+              <p><b>ABV Range:</b> {{data.extendedInfo.style.abvMin}}% - {{data.extendedInfo.style.abvMax}}%</p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <h4>Availability</h4>
+            <p><b>{{data.extendedInfo.available.name}}</b></p>
+            <p>{{data.extendedInfo.available.description}}</p>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <h4>Optimal Drinking Conditions</h4>
+            <div class="col s6">
+              <p><b>Glass:</b> {{data.extendedInfo.glass.name}}</p>
+            </div>
+            <div class="col s6">
+              <p><b>Temperature:</b> {{data.extendedInfo.servingTemperatureDisplay}}</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
+  </div>
+</div>

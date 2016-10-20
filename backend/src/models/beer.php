@@ -133,10 +133,11 @@ class Beer {
                                     $beer['cost']);
         } else {
             $newbeer = new Beer($results[0]);
+            throw new Exception($newbeer->name . " already exists", 409);
         }
         
         if ($newbeer == null){
-            throw new Exception("An error occured finding/creating the brewery", 500);
+            throw new Exception("An error occured finding/creating the beer ".$beer['name'], 500);
         }
         
         return $newbeer;

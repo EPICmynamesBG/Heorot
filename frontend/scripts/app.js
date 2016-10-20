@@ -4,15 +4,18 @@ var app = angular.module('app', ['ui.router']);
 var devURL = 'http://localhost:8888/Heorot/backend/public';
 
 app.constant('config', {
-    dev: true,
-    url: devURL
+  dev: true,
+  url: devURL
 });
 
-app.run(function($rootScope, config, $state) {
-    $rootScope.config = config;
-    $rootScope.$state = $state;
-    $rootScope.loading = false;
-    $(".button-collapse").sideNav();
+app.run(function ($rootScope, config, $state) {
+  $rootScope.config = config;
+  $rootScope.$state = $state;
+  $rootScope.loading = false;
+  $rootScope.modalData = {};
+  $(".button-collapse").sideNav({
+    closeOnClick: true
+  });
 });
 
 
@@ -20,28 +23,29 @@ app.run(function($rootScope, config, $state) {
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/");
 
-    $stateProvider
-        .state('Home', {
-            url: '/',
-            templateUrl: "html/main.html",
-            controller: 'MainController',
-            data: {}
-        })
-        .state('Search', {
-            url: "/search",
-            templateUrl: "html/search.html?beer&brewery",
-            controller: 'SearchController',
-            data: {}
-        })
-        .state('Create', {
-            url: "/create",
-            templateUrl: "html/create.html",
-            controller: 'CreateController',
-            data: {
-                beer: null,
-                breweryName: null
-            }
-        });
+  $stateProvider
+    .state('Home', {
+      url: '/',
+      templateUrl: "html/main.html",
+      controller: 'MainController',
+      data: {}
+    })
+    .state('Search', {
+      dynamic: true,
+      url: "/search?beer&brewery",
+      templateUrl: "html/search.html",
+      controller: 'SearchController',
+      data: {}
+    })
+    .state('Create', {
+      url: "/create",
+      templateUrl: "html/create.html",
+      controller: 'CreateController',
+      data: {
+        beer: null,
+        breweryName: null
+      }
+    });
 });

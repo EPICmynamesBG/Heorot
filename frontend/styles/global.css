@@ -34,12 +34,21 @@ nav .brand-logo {
 }
 
 nav ul,
-nav ul > li{
+nav ul:not(.side-nav) > li{
   height: 100%;
 }
 
 nav input#search {
   width: 260px;
+}
+
+nav input#search:focus {
+  box-shadow: none !important;
+}
+
+.custom-search, 
+nav input#search {
+  transition: 0.3s;
 }
 
 nav .button-collapse {
@@ -90,4 +99,17 @@ a.button-collapse {
 
 footer.page-footer {
   margin-top: 0;
+}
+
+@media only screen and (max-width: 992px) {
+  .custom-search {
+    float: none !important;
+    margin-left: 100px;
+  }
+  .custom-search > li{
+    width: 100%;
+  }
+  nav input#search {
+    width: 100%;
+  }
 }

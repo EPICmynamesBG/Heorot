@@ -1,0 +1,34 @@
+<div class="parallax-container search-parallax-container">
+  <div class="parallax"><img src="./assets/images/beer_texture.jpg"></div>
+</div>
+<div class="section white search-section">
+  <div class="row search-table-container">
+    <table class="striped highlight responsive-table">
+      <thead>
+        <tr>
+          <th data-field="id">Name <input placeholder="Budweiser" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /></th>
+          <th data-field="style">Style</th>
+          <th data-field="cost">Cost</th>
+          <th data-field="brewery">Brewery <input placeholder="Anhueser-Busch" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /></th>
+          <th data-field="ibu">IBU</th>
+          <th data-field="abv">ABV</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="beer in beerList | filter:filter" ng-click="viewBeer(beer.id)">
+          <td>{{beer.name}}</td>
+          <td>{{beer.style ? beer.style: 'Not Provided'}}</td>
+          <td>${{beer.cost}}</td>
+          <td>{{beer.brewery.name}}</td>
+          <td>{{beer.ibu}}</td>
+          <td>{{beer.abv}}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="parallax-container search-parallax-container">
+  <div class="parallax"><img src="./assets/images/beer_texture.jpg"></div>
+</div>
+<beer-modal data="beerModalData"></beer-modal>

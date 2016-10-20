@@ -1,0 +1,62 @@
+.search-parallax-container {
+  height: 110px;
+}
+
+.search-section {
+  min-height: 450px;
+}
+
+.search-table-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.modal-beer-logo {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  border-radius: 100%;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.12);
+  background-color: transparent;
+}
+
+.modal-beer-logo > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+i.info {
+  font-size: 7px;
+  line-height: 3rem;
+  font-weight: 100;
+  width: auto;
+}
+
+ul.collapsible .row h4 {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-left: 30px;
+}
+
+table thead tr th {
+  position: relative;
+}
+
+table input.inline {
+  display: inline-block;
+  width: auto;
+  margin: auto 0 auto 10px;
+  height: 1.2rem;
+  font-size: 1rem;
+  color: #607d8b;
+}
+
+table input.inline:focus {
+  color: #ffa000 !important;
+  border-color: #ffc107 !important;
+  box-shadow: 0 1px 0 0 #ffc107 !important;
+}

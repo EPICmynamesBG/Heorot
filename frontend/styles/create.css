@@ -44,3 +44,9 @@ textarea.materialize-textarea:focus {
 .material-tooltip .backdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+ul.dropdown-content li > a,
+ul.dropdown-content li > span
+{
+  color: #ffa000;
+}

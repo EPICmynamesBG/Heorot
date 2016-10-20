@@ -78,10 +78,11 @@ class Brewery {
             return;
         } else {
             $brewery = new Brewery($results[0]);
+            throw new Exception($brewery->name . " already exists", 409);
         }
         
         if ($brewery == null){
-            throw new Exception("An error occured finding/creating the brewery", 500);
+            throw new Exception("An error occured finding/creating the brewery ".$brew['name'], 500);
         }
         
         return $brewery;
