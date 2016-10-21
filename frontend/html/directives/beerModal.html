@@ -40,7 +40,7 @@
           </div>
         </div>
       </li>
-      <li ng-if="data.extendedInfo">
+      <li ng-if="data.extendedInfo && data.extendedInfo.name == data.name">
         <div class="collapsible-header"><i class="material-icons">note_add</i>Additional Info<i class="right info">Provided by BreweryDB</i></div>
         <div class="collapsible-body">
           <div class="row">
@@ -54,14 +54,14 @@
               <p><b>ABV Range:</b> {{data.extendedInfo.style.abvMin}}% - {{data.extendedInfo.style.abvMax}}%</p>
             </div>
           </div>
-          <div class="divider"></div>
-          <div class="row">
+          <div class="divider" ng-if="data.extendedInfo.available"></div>
+          <div class="row" ng-if="data.extendedInfo.available">
             <h4>Availability</h4>
             <p><b>{{data.extendedInfo.available.name}}</b></p>
             <p>{{data.extendedInfo.available.description}}</p>
           </div>
-          <div class="divider"></div>
-          <div class="row">
+          <div class="divider" ng-if="data.extendedInfo.glass || data.extendedInfo.servingTemperatureDisplay"></div>
+          <div class="row" ng-if="data.extendedInfo.glass || data.extendedInfo.servingTemperatureDisplay">
             <h4>Optimal Drinking Conditions</h4>
             <div class="col s6">
               <p><b>Glass:</b> {{data.extendedInfo.glass.name}}</p>

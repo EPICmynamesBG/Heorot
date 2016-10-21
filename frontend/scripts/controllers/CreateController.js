@@ -88,11 +88,11 @@ app.controller('CreateController', ['$scope', '$state', 'API', '$rootScope', 'He
         console.log(data);
         $rootScope.modalData = {
           title: 'Success',
-          description: data.data.name + ' created'
+          description: data.data.data.name + ' created'
         };
         $('#modal').openModal();
         $rootScope.loading = false;
-        $rootScope.$apply();
+        load();
       }, function (error) {
         $rootScope.modalData = {
           title: 'Error: ' + error.data.status,

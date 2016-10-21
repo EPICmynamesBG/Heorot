@@ -75,7 +75,7 @@ class Brewery {
             } else {
                 $brewery = Brewery::create($brew['name'], $brew['location']);
             }
-            return;
+            
         } else {
             $brewery = new Brewery($results[0]);
         }

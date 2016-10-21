@@ -1,10 +1,10 @@
 app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$stateParams', function ($scope, $state, API, $rootScope, $stateParams) {
-  
+
   $scope.filter = {};
   $scope.filter.brewery = {};
   $scope.filter.name = $stateParams.beer;
   $scope.filter.brewery.name = $stateParams.brewery;
-  
+
   $scope.beerList = [];
   $scope.beerModalData = {};
 
@@ -31,6 +31,7 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
     API.beer.getById(beerId)
       .then(function (data) {
         $scope.beerModalData = data.data.data;
+        console.log($scope.beerModalData);
         $('#beer-modal').openModal();
         $('.collapsible').collapsible({
           accordion: false
@@ -45,13 +46,19 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         $rootScope.loading = false;
       });
   };
-  
-  $scope.applyFilter = function() {
-    $state.go('Search', {beer: $scope.filter.name, brewery: $scope.filter.brewery.name}, {notify: false, location: "replace"});
+
+  $scope.applyFilter = function () {
+    $state.go('Search', {
+      beer: $scope.filter.name,
+      brewery: $scope.filter.brewery.name
+    }, {
+      notify: false,
+      location: "replace"
+    });
   };
-  
+
   //throw the modal from the nav bar
-  if ($state.current.data.showModal){
+  if ($state.current.data.showModal) {
     $scope.viewBeer($state.current.data.beerId);
     $state.current.data.showModal = false;
     $state.current.data.beerId = -1;
