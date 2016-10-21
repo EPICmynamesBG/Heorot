@@ -12,7 +12,8 @@ html {
 }
 
 body {
-  background-color: #eceff1;
+  background-image: url(../assets/images/beer_texture.jpg);
+  background-size: cover;
   height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -64,6 +65,11 @@ loading {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.spacer {
+  height: 6rem;
+  background-color: transparent;
 }
 
 .side-nav li > a > i.text {

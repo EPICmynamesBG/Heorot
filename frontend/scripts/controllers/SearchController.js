@@ -5,7 +5,6 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
   $scope.filter.name = $stateParams.beer;
   $scope.filter.brewery.name = $stateParams.brewery;
   
-  $('.parallax').parallax();
   $scope.beerList = [];
   $scope.beerModalData = {};
 

@@ -1,15 +1,13 @@
-<div class="parallax-container search-parallax-container">
-  <div class="parallax"><img src="./assets/images/beer_texture.jpg"></div>
-</div>
+<div class="spacer"></div>
 <div class="section white search-section">
   <div class="row search-table-container">
     <table class="striped highlight responsive-table">
       <thead>
         <tr>
-          <th data-field="id">Name <input placeholder="Budweiser" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /></th>
+          <th data-field="id"><input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /></th>
           <th data-field="style">Style</th>
           <th data-field="cost">Cost</th>
-          <th data-field="brewery">Brewery <input placeholder="Anhueser-Busch" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /></th>
+          <th data-field="brewery"><input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /></th>
           <th data-field="ibu">IBU</th>
           <th data-field="abv">ABV</th>
         </tr>
@@ -28,7 +26,5 @@
     </table>
   </div>
 </div>
-<div class="parallax-container search-parallax-container">
-  <div class="parallax"><img src="./assets/images/beer_texture.jpg"></div>
-</div>
+<div class="spacer"></div>
 <beer-modal data="beerModalData"></beer-modal>

@@ -3,7 +3,7 @@
 }
 
 .search-section {
-  min-height: 450px;
+  min-height: 335px;
 }
 
 .search-table-container {
@@ -60,3 +60,24 @@ table input.inline:focus {
   border-color: #ffc107 !important;
   box-shadow: 0 1px 0 0 #ffc107 !important;
 }
+
+@media screen and (max-width: 425px) {
+  table input.inline {
+    width: 70px;
+  }
+  beer-modal .row .col.s6 > p {
+    padding: 0.5rem;
+  }
+  
+  beer-modal .modal {
+    max-height: 85%;
+    width: 95%;
+  }
+  
+  beer-modal .modal.modal-fixed-footer {
+    height: 85%;
+    top: 7% !important;
+  }
+}
+
+
