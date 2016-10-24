@@ -50,3 +50,20 @@ ul.dropdown-content li > span
 {
   color: #ffa000;
 }
+
+@media screen and (min-width: 1400px) {
+    div.section.left-on-large {
+        display: inline-block;
+        width: 48%;
+    }
+    
+    div.section.right-on-large {
+        display: inline-block;
+        float: right;
+        width: 48%;
+    }
+    
+    div.hide-on-large {
+        display: none;
+    }
+}

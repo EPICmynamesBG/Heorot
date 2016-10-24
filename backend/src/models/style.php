@@ -31,9 +31,9 @@ class Style {
             'name' => $name
         );
         
-        $brew_id = $db->insert("Style", $arr);
+        $id = $db->insert("Style", $arr);
         
-        return Brewery::getById($brew_id);
+        return Style::getById($id);
     }
     
     public static function findOrCreate($style) {
@@ -63,10 +63,10 @@ class Style {
         return $newStyle;
     }
     
-    public static function getById($brewId) {
+    public static function getById($id) {
         $db = DB::getInstance();
         $results = $db->select('Style','*',[
-            'id' => $brewId
+            'id' => $id
         ]);
         
         if (sizeof($results) == 0 || !$results){
@@ -113,7 +113,7 @@ class Style {
                 'style'=> $s
             );
             array_push($arr, $obj);
-		    }
+        }
         
         return $arr;
         

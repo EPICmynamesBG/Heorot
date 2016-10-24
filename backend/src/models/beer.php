@@ -115,7 +115,7 @@ class Beer {
         $this->extendedInfo = $brewDB->getInfoForBeer($this->name);
     }
     
-    public static function create($name, $size = null, $ibu = null, $brewery = $null, $abv = null, $description = null, $cost, $style, $featured = false) {
+    public static function create($name, $size = null, $ibu = null, $brewery = null, $abv = null, $description = null, $cost, $style, $featured = false) {
         
         $db = DB::getInstance();
         $arr = array(

@@ -77,7 +77,12 @@
                       {{brewery.brewery.name}}<i class="small material-icons">domain</i>
                     </span>
                   </li>
-                  <li ng-if="searchResults.breweries.length == 0 && searchResults.beers.length == 0">
+                  <li ng-repeat="style in searchResults.styles" ng-if="searchResults.styles.length > 0" ng-click="searchSelect(style)">
+                    <span>
+                      {{style.style.name}}<i class="small material-icons">style</i>
+                    </span>
+                  </li>
+                  <li ng-if="searchResults.breweries.length == 0 && searchResults.beers.length == 0 && searchResults.styles.length == 0">
                     <span>No Results Found</span>
                   </li>
                 </ul>

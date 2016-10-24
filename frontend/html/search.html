@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th data-field="id"><input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /></th>
-          <th data-field="style">Style</th>
+          <th data-field="style"><input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /></th>
           <th data-field="cost">Cost</th>
           <th data-field="brewery"><input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /></th>
           <th data-field="ibu">IBU</th>
@@ -16,7 +16,7 @@
       <tbody>
         <tr ng-repeat="beer in beerList | filter:filter" ng-click="viewBeer(beer.id)">
           <td>{{beer.name}}</td>
-          <td>{{beer.style ? beer.style: 'Not Provided'}}</td>
+          <td>{{beer.style.name}}</td>
           <td>${{beer.cost}}</td>
           <td>{{beer.brewery.name}}</td>
           <td>{{beer.ibu}}</td>

@@ -23,6 +23,13 @@ require_once __DIR__ . "/../models/brewery.php";
 *         required=false,
 *         type="string"
 *     ),
+*     @SWG\Parameter(
+*         description="part of a Style name",
+*         in="query",
+*         name="style",
+*         required=false,
+*         type="string"
+*     ),
 *     @SWG\Response(
 *         response=200,
 *         description="Success",
@@ -43,7 +50,7 @@ $app->get('/search', function ($request, $response, $args) {
     $beer = $request->getQueryParam('beer');
     $brewery = $request->getQueryParam('brewery');
     $style = $request->getQueryParam('style');
-    if (!isset($beer) && !isset($brewery) && !iset($style)){
+    if (!isset($beer) && !isset($brewery) && !isset($style)){
         throw new Exception("No search parameters provided", 400);
     }
     

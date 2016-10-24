@@ -24,12 +24,12 @@ app.service('$search', ['config', '$http', '$rootScope', '$q', function (config,
     $rootScope.$broadcast('search.error', error);
   };
 
-  this.search = function (beer, brewery) {
+  this.search = function (beer, brewery, style) {
     
     if ($http.pendingRequests.length <= 0) {
       //If I use get method here, clicking the "Send Request" button will cancel the previous request and start
       //a new request. While for post, it won't work
-      $http.get(config.url + '/search?beer=' + beer + '&brewery=' + brewery, {
+      $http.get(config.url + '/search?beer=' + beer + '&brewery=' + brewery + '&style=' + style, {
         timeout: this.canceller.promise,
         headers: {
           "Content-Type": "application/json"
@@ -50,7 +50,7 @@ app.service('$search', ['config', '$http', '$rootScope', '$q', function (config,
       //Then start a new request
       //If I use get method here, clicking the "Send Request" button will cancel the previous request and start
       //a new request. While for post, it won't work
-      $http.get(config.url + '/search?beer=' + beer + '&brewery=' + brewery, {
+      $http.get(config.url + '/search?beer=' + beer + '&brewery=' + brewery + '&style=' + style, {
         timeout: this.canceller.promise,
         headers: {
           "Content-Type": "application/json"
