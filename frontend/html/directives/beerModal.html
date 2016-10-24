@@ -1,7 +1,7 @@
 <div id="beer-modal" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>{{data.name}}</h4>
-    <span class="modal-beer-logo" ng-if="data.extendedInfo.labels.medium">
+    <span class="modal-beer-logo" ng-if="data.extendedInfo">
       <img ng-src="{{data.extendedInfo.labels.medium}}" />
     </span>
     <div class="divider"></div>
@@ -10,8 +10,11 @@
         <div class="collapsible-header active"><i class="material-icons">public</i>General</div>
         <div class="collapsible-body">
           <p ng-if="data.description">{{data.description}}</p>
-          <p ng-if="!data.description">{{data.extendedInfo.description}}</p>
+          <p ng-if="!data.description && data.extendedInfo">{{data.extendedInfo.description}}</p>
           <div class="row">
+            <div class="col s12" ng-if="data.featured != null">
+              <p>**<b>Featured Brew</b> as of {{data.featured | date:'yyyy-MM-dd'}}**</p>
+            </div>
             <div class="col s6">
               <p><b>Cost:</b> ${{data.cost}}</p>
               <p ng-if="data.size"><b>Size:</b> {{data.size}}</p>
@@ -38,11 +41,37 @@
               <p ng-if="!data.brewery.location"><b>Location:</b> Not Provided</p>
             </div>
           </div>
+          <div class="row" ng-if="data.brewery.extendedInfo != null">
+            <h5 class="more-info-header">Extended Info<i class="right info">Provided by BreweryDB</i></h5>
+            <div class="more-info">
+              <p ng-if="data.brewery.extendedInfo.description"><span class="modal-brew-logo left" ng-if="data.brewery.extendedInfo.images != null">
+                <img ng-src="{{data.brewery.extendedInfo.images.squareMedium}}" />
+              </span>{{data.brewery.extendedInfo.description}}</p>
+              <div class="row">
+                <div class="col s12 m6">
+                  <p><b>Founded:</b> {{data.brewery.extendedInfo.established}}</p>
+                </div>
+                <div class="col s12 m6">
+                  <p ng-if="data.brewery.extendedInfo.website"><b>Website:</b> <a target="_blank" class="center view-more" href="{{data.brewery.extendedInfo.website}}">{{data.brewery.extendedInfo.website}}</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </li>
-      <li ng-if="data.extendedInfo && data.extendedInfo.name == data.name">
+      <li ng-if="data.extendedInfo">
         <div class="collapsible-header"><i class="material-icons">note_add</i>Additional Info<i class="right info">Provided by BreweryDB</i></div>
         <div class="collapsible-body">
+          <div class="row">
+            <h4>Organic</h4>
+            <p>{{data.extendedInfo.isOrganic == 'Y' ? 'Yes':'No' }}</p>
+          </div>
+          <div class="divider" ng-if="data.extendedInfo.isOrganic != null"></div>
+          <div class="row">
+            <h4>BreweryDB Description</h4>
+            <p>{{data.extendedInfo.description}}</p>
+          </div>
+          <div class="divider" ng-if="data.extendedInfo.description"></div>
           <div class="row">
             <h4>Style</h4>
             <p><b>{{data.extendedInfo.style.name}}</b></p>
@@ -69,6 +98,10 @@
             <div class="col s6">
               <p><b>Temperature:</b> {{data.extendedInfo.servingTemperatureDisplay}}</p>
             </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row">
+            <a href="http://www.brewerydb.com/beer/{{data.extendedInfo.id}}" class="center view-more" target="_blank">View on BreweryDB</a>
           </div>
         </div>
       </li>

@@ -9,8 +9,8 @@
         <form novalidate ng-init="newBeer = {}" name="CreateBeer">
             <div class="section left-on-large">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input id="featured" ng-model="newBeer.featured" type="checkbox" class="validate" autocomplete="off" required value="false" >
+                    <div class="input-field col s12" ng-init="newBeer.featured = false;">
+                        <input id="featured" ng-model="newBeer.featured" type="checkbox" class="validate filled-in" autocomplete="off" ng-false-value="false" ng-true-value="true" >
                         <label for="featured">Featured Beer</label>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
             <div class="divider hide-on-large"></div>
             <div class="section right-on-large">
                 <h4 class="header">Style</h4>
-                <div class="row">
+                <div class="row" ng-init="newBeer.style = {}">
                     <div class="input-field col s12" ng-init="newBeer.style = {}">
-                        <input id="style" ng-model="newBeer.style.name" type="text" class="validate autocomplete" autocomplete="off" ng-change="autocompleteChange('style')">
+                        <input id="style" ng-model="newBeer.style.name" type="text" class="validate autocomplete" required autocomplete="off" ng-change="autocompleteChange('style')">
                         <label for="style" data-error="Input Invalid">Style</label>
                         <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: India Pale Ale (IPA)"><i class="material-icons small text-amber">info</i></a>
                     </div>

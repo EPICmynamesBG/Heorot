@@ -103,7 +103,7 @@ class Beer {
             throw new Exception('Style not provided', 500);
         }
         if (isset($data['featured']) && $data['featured'] != null){
-            $this->featured = strtotime($date['date']);
+            $this->featured = date("Y-m-d H:i:s", strtotime($data['featured']));
         } else {
             $this->featured = null;
         }
@@ -113,6 +113,7 @@ class Beer {
     function addExtendedInfo() {
         $brewDB = new BreweryDB();
         $this->extendedInfo = $brewDB->getInfoForBeer($this->name);
+        $this->brewery->extendedInfo = $brewDB->getInfoForBrewery($this->brewery->name);
     }
     
     public static function create($name, $size = null, $ibu = null, $brewery = null, $abv = null, $description = null, $cost, $style, $featured = false) {
@@ -127,7 +128,7 @@ class Beer {
             'description' => $description,
             'cost' => floatval($cost),
             'style' => $style->id,
-            'featured' => $featured ? time() : null
+            'featured' => $featured ? date("Y-m-d H:i:s") : null
         );
         
         $beer_id = $db->insert("Beer", $arr);

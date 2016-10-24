@@ -102,6 +102,7 @@ app.controller('CreateController', ['$scope', '$state', 'API', '$rootScope', 'He
     load();
 
     $scope.submit = function () {
+      
         API.beer.create($scope.newBeer)
             .then(function (data) {
                 console.log(data);

@@ -185,6 +185,13 @@ footer.page-footer {
   margin-top: 0;
 }
 
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 @media only screen and (max-width: 992px) {
   .custom-search {
     float: none !important;

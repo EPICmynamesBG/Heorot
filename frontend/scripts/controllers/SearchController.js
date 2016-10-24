@@ -33,6 +33,9 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         API.beer.getById(beerId)
             .then(function (data) {
                 $scope.beerModalData = data.data.data;
+                if ($scope.beerModalData.featured != null) {
+                  $scope.beerModalData.featured = Date.parse($scope.beerModalData.featured);
+                }
                 console.log($scope.beerModalData);
                 $('#beer-modal').openModal();
                 $('.collapsible').collapsible({

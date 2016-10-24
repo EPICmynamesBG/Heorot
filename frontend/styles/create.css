@@ -51,6 +51,10 @@ ul.dropdown-content li > span
   color: #ffa000;
 }
 
+a.view-more {
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 1400px) {
     div.section.left-on-large {
         display: inline-block;
