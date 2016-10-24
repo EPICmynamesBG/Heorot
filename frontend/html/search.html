@@ -4,10 +4,10 @@
     <table class="striped highlight responsive-table">
       <thead>
         <tr>
-          <th data-field="id"><input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /></th>
-          <th data-field="style"><input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /></th>
+          <th data-field="id"><input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('beer')" ng-show="filter.name.length > 0">close</i></th>
+          <th data-field="style"><input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('style')" ng-show="filter.style.name.length > 0">close</i></th>
           <th data-field="cost">Cost</th>
-          <th data-field="brewery"><input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /></th>
+          <th data-field="brewery"><input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('brewery')" ng-show="filter.brewery.name.length > 0">close</i></th>
           <th data-field="ibu">IBU</th>
           <th data-field="abv">ABV</th>
         </tr>

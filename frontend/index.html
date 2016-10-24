@@ -64,7 +64,7 @@
                   <label for="search"><i class="material-icons" ng-if="!searchLoading">search</i>
                     <loading class="search-loading" ng-if="searchLoading" size="small"></loading>
                   </label>
-                  <i class="material-icons">close</i>
+                  <i class="material-icons" ng-click="clearSearch()">close</i>
                 </div>
                 <ul class="search-dropdown" ng-class="[searchResults != null && showDropdown && searchText.length > 0 ? 'active':'hidden']">
                   <li ng-repeat="beer in searchResults.beers" ng-if="searchResults.beers.length > 0" ng-click="searchSelect(beer)">
@@ -82,7 +82,7 @@
                       {{style.style.name}}<i class="small material-icons">style</i>
                     </span>
                   </li>
-                  <li ng-if="searchResults.breweries.length == 0 && searchResults.beers.length == 0 && searchResults.styles.length == 0">
+                  <li ng-if="searchResults.breweries.length == 0 && searchResults.beers.length == 0 && searchResults.styles.length == 0" ng-click="clearSearch()">
                     <span>No Results Found</span>
                   </li>
                 </ul>

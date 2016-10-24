@@ -10,6 +10,12 @@
             <div class="section left-on-large">
                 <div class="row">
                     <div class="input-field col s12">
+                        <input id="featured" ng-model="newBeer.featured" type="checkbox" class="validate" autocomplete="off" required value="false" >
+                        <label for="featured">Featured Beer</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
                         <input id="name" ng-model="newBeer.name" type="text" class="validate autocomplete" autocomplete="off" required ng-change="autocompleteChange('name')">
                         <label for="name" data-error="Input Invalid">Name</label>
                         <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Budweiser"><i class="material-icons small text-amber">info</i></a>

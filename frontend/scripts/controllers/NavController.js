@@ -87,5 +87,9 @@ app.controller('NavController', ['$scope', '$state', 'API', '$rootScope', '$sear
             });
         }
     };
+    
+    $scope.clearSearch = function() {
+        $scope.searchText = '';
+    };
 
 }]);

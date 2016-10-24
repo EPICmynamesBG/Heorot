@@ -60,6 +60,25 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         });
     };
 
+    $scope.clearFilter = function (filterType) {
+        if (filterType == 'beer') {
+            $scope.filter.name = '';
+        } else if (filterType == 'brewery') {
+            $scope.filter.brewery.name = '';
+        } else {
+            $scope.filter.style.name = '';
+        }
+
+        $state.go('Search', {
+            beer: $scope.filter.name,
+            brewery: $scope.filter.brewery.name,
+            style: $scope.filter.style.name
+        }, {
+            notify: false,
+            location: "replace"
+        });
+    }
+
     //throw the modal from the nav bar
     if ($state.current.data.showModal) {
         $scope.viewBeer($state.current.data.beerId);
