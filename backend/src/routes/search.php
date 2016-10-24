@@ -42,22 +42,28 @@ require_once __DIR__ . "/../models/brewery.php";
 $app->get('/search', function ($request, $response, $args) {
     $beer = $request->getQueryParam('beer');
     $brewery = $request->getQueryParam('brewery');
-    if (!isset($beer) && !isset($brewery)){
+    $style = $request->getQueryParam('style');
+    if (!isset($beer) && !isset($brewery) && !iset($style)){
         throw new Exception("No search parameters provided", 400);
     }
     
     $beerList = array();
     $breweryList = array();
+    $styleList = array();
     if (isset($beer)){
       $beerList = Beer::search($beer);
     }
     if (isset($brewery)){
       $breweryList = Brewery::search($brewery);
     }
+    if (isset($style)){
+      $styleList = Style::search($style);
+    }
     
     $combined = array(
         'beers' => $beerList,
-        'breweries' => $breweryList
+        'breweries' => $breweryList,
+        'styles' => $styleList
     );
     
     $out = new Response($combined);

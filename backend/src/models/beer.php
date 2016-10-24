@@ -7,7 +7,8 @@ require_once __DIR__ . "/../util/breweryDB.php";
  *  required={
  *      "name",
  *      "brewery",
- *      "cost"
+ *      "cost",
+ *      "style"
  *   }
  *  )
  */
@@ -63,6 +64,18 @@ class Beer {
     
     /**
      * @SWG\Property()
+     * @var Style
+     */
+    public $style;
+    
+    /**
+     * @SWG\Property()
+     * @var date
+     */
+    public $featured;
+    
+    /**
+     * @SWG\Property()
      * @var object
      */
     public $extendedInfo;
@@ -82,6 +95,18 @@ class Beer {
         $this->abv = floatval($data['abv']);
         $this->description = $data['description'];
         $this->cost = floatval($data['cost']);
+        if (isset($data['style'])){
+            $this->style = Style::getById($data['style']);
+        } else if (isset($data['style']['id'])){
+            $this->style = Style::getById($data['style']['id']);
+        } else {
+            throw new Exception('Style not provided', 500);
+        }
+        if (isset($data['featured']) && $data['featured'] != null){
+            $this->featured = strtotime($date['date']);
+        } else {
+            $this->featured = null;
+        }
         $this->extendedInfo = null;
     }
     
@@ -90,16 +115,19 @@ class Beer {
         $this->extendedInfo = $brewDB->getInfoForBeer($this->name);
     }
     
-    public static function create($name, $size = null, $ibu = null, $brewery, $abv = null, $description = null, $cost) {
+    public static function create($name, $size = null, $ibu = null, $brewery = $null, $abv = null, $description = null, $cost, $style, $featured = false) {
+        
         $db = DB::getInstance();
         $arr = array(
             'name' => $name,
             'size' => $size,
             'ibu' => intval($ibu),
-            'brewery_id' => $brewery->id,
+            'brewery_id' => $brewery != null ? $brewery->id: $brewery,
             'abv' => floatval($abv),
             'description' => $description,
-            'cost' => floatval($cost)
+            'cost' => floatval($cost),
+            'style' => $style->id,
+            'featured' => $featured ? time() : null
         );
         
         $beer_id = $db->insert("Beer", $arr);
@@ -119,9 +147,17 @@ class Beer {
             if (sizeof($results) > 1){
                 throw new Exception("Multiple instances of the beer ".$beer['name']." found", 500);
             }
-            $brewery = Brewery::findOrCreate($beer['brewery']);
+            $brewery = $null;
+            if (isset($beer['brewery'])){
+                $brewery = Brewery::findOrCreate($beer['brewery']);
+                if ($brewery == null){
+                    throw new Exception("An error occured finding/creating the brewery ".$beer['brewery']['name'], 500);
+                }
+            }
+            
+            $style = Style::findOrCreate($beer['style']);
             if ($brewery == null){
-                throw new Exception("An error occured finding/creating the brewery ".$beer['brewery']['name'], 500);
+                throw new Exception("An error occured finding/creating the style ".$beer['style']['name'], 500);
             }
             
             $newbeer = Beer::create($beer['name'], 
@@ -130,7 +166,9 @@ class Beer {
                                     $brewery,
                                     $beer['abv'], 
                                     $beer['description'], 
-                                    $beer['cost']);
+                                    $beer['cost'],
+                                    $style,
+                                    $beer['featured']);
         } else {
             $newbeer = new Beer($results[0]);
             throw new Exception($newbeer->name . " already exists", 409);
@@ -178,6 +216,7 @@ class Beer {
         $results = $db->select('Beer','*',[
             'name[~]' => $name,
             "ORDER" => "name",
+            'LIMIT' => 10
         ]);
         
         if (sizeof($results) == 0 || !$results){
@@ -192,7 +231,7 @@ class Beer {
                 'beer'=> $b
             );
             array_push($beers, $obj);
-		    }
+        }
         
         return $beers;
         

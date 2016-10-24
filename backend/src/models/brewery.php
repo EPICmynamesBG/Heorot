@@ -122,6 +122,7 @@ class Brewery {
         $results = $db->select('Brewery','*',[
             'name[~]' => $name,
             "ORDER" => "name",
+            'LIMIT' => 10
         ]);
         
         if (sizeof($results) == 0 || !$results){
