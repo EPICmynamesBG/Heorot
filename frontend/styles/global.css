@@ -23,6 +23,9 @@ body {
   flex-direction: column;
 }
 
+*:focus {
+  outline: none;
+}
 
 /* Sticky Footer */
 
