@@ -34,7 +34,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('Search', {
       dynamic: true,
-      url: "/search?beer&brewery&style",
+      url: "/search?beer&brewery&style&sort",
       templateUrl: "html/search.html",
       controller: 'SearchController',
       data: {

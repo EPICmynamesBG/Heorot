@@ -1,6 +1,7 @@
 app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$stateParams', function ($scope, $state, API, $rootScope, $stateParams) {
 
     $scope.filter = {};
+    $scope.sorting = $stateParams.sort;
     $scope.filter.brewery = {};
     $scope.filter.style = {};
     $scope.filter.name = $stateParams.beer;
@@ -56,7 +57,8 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         $state.go('Search', {
             beer: $scope.filter.name,
             brewery: $scope.filter.brewery.name,
-            style: $scope.filter.style.name
+            style: $scope.filter.style.name,
+            sort: $scope.sorting
         }, {
             notify: false,
             location: "replace"
@@ -75,12 +77,30 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         $state.go('Search', {
             beer: $scope.filter.name,
             brewery: $scope.filter.brewery.name,
-            style: $scope.filter.style.name
+            style: $scope.filter.style.name,
+            sort: $scope.sorting
         }, {
             notify: false,
             location: "replace"
         });
-    }
+    };
+  
+    $scope.sortBy = function(sortType) {
+        if ($scope.sorting == sortType) {
+          $scope.sorting = "-" + sortType;
+        } else {
+          $scope.sorting = sortType;
+        }
+        $state.go('Search', {
+            beer: $scope.filter.name,
+            brewery: $scope.filter.brewery.name,
+            style: $scope.filter.style.name,
+            sort: $scope.sorting
+        }, {
+            notify: false,
+            location: "replace"
+        });
+    };
 
     //throw the modal from the nav bar
     if ($state.current.data.showModal) {

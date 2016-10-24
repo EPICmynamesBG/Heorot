@@ -4,17 +4,38 @@
     <table class="striped highlight responsive-table">
       <thead>
         <tr>
-          <th data-field="id"><input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('beer')" ng-show="filter.name.length > 0">close</i></th>
-          <th data-field="style"><input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('style')" ng-show="filter.style.name.length > 0">close</i></th>
-          <th data-field="cost">Cost</th>
-          <th data-field="brewery"><input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('brewery')" ng-show="filter.brewery.name.length > 0">close</i></th>
-          <th data-field="ibu">IBU</th>
-          <th data-field="abv">ABV</th>
+          <th data-field="id">
+            <a ng-click="sortBy('name')" ng-if="sorting == 'name'">&#x25BE;</a>
+            <a ng-click="sortBy('name')" ng-if="sorting == '-name'">&#x25B4;</a>
+            <a ng-click="sortBy('name')" ng-if="sorting != '-name' && sorting != 'name'">&#x25A1;</a>
+            <input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('beer')" ng-show="filter.name.length > 0">close</i></th>
+          <th data-field="style">
+            <a ng-click="sortBy('style')" ng-if="sorting == 'style'">&#x25BE;</a>
+            <a ng-click="sortBy('style')" ng-if="sorting == '-style'">&#x25B4;</a>
+            <a ng-click="sortBy('style')" ng-if="sorting != '-style' && sorting != 'style'">&#x25A1;</a>
+            <input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('style')" ng-show="filter.style.name.length > 0">close</i></th>
+          <th data-field="cost" ng-click="sortBy('cost')">
+            <a ng-if="sorting == 'cost'">&#x25BE;</a>
+            <a ng-if="sorting == '-cost'">&#x25B4;</a> Cost
+          </th>
+          <th data-field="brewery">
+            <a ng-click="sortBy('brewery')" ng-if="sorting == 'brewery'">&#x25BE;</a>
+            <a ng-click="sortBy('brewery')" ng-if="sorting == '-brewery'">&#x25B4;</a>
+            <a ng-click="sortBy('brewery')" ng-if="sorting != '-brewery' && sorting != 'brewery'">&#x25A1;</a>
+            <input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('brewery')" ng-show="filter.brewery.name.length > 0">close</i></th>
+          <th data-field="ibu" ng-click="sortBy('ibu')">
+            <a ng-if="sorting == 'ibu'">&#x25BE;</a>
+            <a ng-if="sorting == '-ibu'">&#x25B4;</a> IBU
+          </th>
+          <th data-field="abv" ng-click="sortBy('abv')">
+            <a ng-if="sorting == 'abv'">&#x25BE;</a>
+            <a ng-if="sorting == '-abv'">&#x25B4;</a> ABV
+          </th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="beer in beerList | filter:filter" ng-click="viewBeer(beer.id)">
+        <tr ng-repeat="beer in beerList | filter:filter | orderBy: sorting" ng-click="viewBeer(beer.id)">
           <td>{{beer.name}}</td>
           <td>{{beer.style.name}}</td>
           <td>${{beer.cost}}</td>
