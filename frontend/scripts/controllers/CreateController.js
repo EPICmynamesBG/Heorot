@@ -5,7 +5,7 @@ app.controller('CreateController', ['$scope', '$state', 'API', '$rootScope', 'He
     $scope.breweryList = [];
     this.parsedBreweryList = {};
     this.locationList = {};
-    $scope.parsedStyleList = [];
+    $scope.styleList = [];
     this.parsedStyleList = {};
 
 
@@ -100,8 +100,32 @@ app.controller('CreateController', ['$scope', '$state', 'API', '$rootScope', 'He
     };
 
     load();
+  
+    var idForBrewery = function(brewery) {
+        for (var i = 0; i < $scope.breweryList.length; i++){
+            var brew = $scope.breweryList[i];
+            if (brew.name == brewery){
+                return brew.id;
+            }
+        }
+        return undefined;
+    };
+  
+    var idForStyle = function(style) {
+        for (var i = 0; i < $scope.styleList.length; i++) {
+            var sty = $scope.styleList[i];
+            if (sty.name == style) {
+                return sty.id;
+            }
+        }
+        return undefined;
+    }
 
     $scope.submit = function () {
+        
+        //use ID for Style and Brewery, if possible
+        $scope.newBeer.brewery.id = idForBrewery($scope.newBeer.brewery.name);
+        $scope.newBeer.style.id = idForStyle($scope.newBeer.style.name);
       
         API.beer.create($scope.newBeer)
             .then(function (data) {
