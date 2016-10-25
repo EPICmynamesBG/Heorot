@@ -38,6 +38,10 @@ class Style {
     
     public static function findOrCreate($style) {
         $db = DB::getInstance();
+      
+        if (isset($style['id'])){
+            return Style::getById($style['id']);
+        }
         
         $results = $db->select('Style','*',[
             'name[~]' => $style['name']

@@ -58,6 +58,10 @@ class Brewery {
     
     public static function findOrCreate($brew) {
         $db = DB::getInstance();
+      
+        if (isset($brew['id'])){
+            return Brewery::getById($brew['id']);
+        }
         
         $results = $db->select('Brewery','*',[
             'name[~]' => $brew['name']
