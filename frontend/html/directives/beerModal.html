@@ -16,7 +16,7 @@
               <p>**<b>Featured Brew</b> as of {{data.featured | date:'yyyy-MM-dd'}}**</p>
             </div>
             <div class="col s6">
-              <p><b>Cost:</b> ${{data.cost}}</p>
+              <p><b>Cost:</b> {{data.cost | currency:"$":2}}</p>
               <p ng-if="data.size"><b>Size:</b> {{data.size}}</p>
               <p ng-if="!data.size"><b>Size:</b> Not Provided</p>
             </div>
