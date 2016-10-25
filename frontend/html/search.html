@@ -38,7 +38,7 @@
         <tr ng-repeat="beer in beerList | filter:filter | orderBy: sorting" ng-click="viewBeer(beer.id)">
           <td>{{beer.name}}</td>
           <td>{{beer.style.name}}</td>
-          <td>${{beer.cost}}</td>
+          <td>{{beer.cost | currency:"$":2}}</td>
           <td>{{beer.brewery.name}}</td>
           <td>{{beer.ibu}}</td>
           <td>{{beer.abv}}%</td>
