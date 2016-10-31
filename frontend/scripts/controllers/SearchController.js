@@ -1,6 +1,23 @@
 app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$stateParams', function ($scope, $state, API, $rootScope, $stateParams) {
 
     $scope.filter = {};
+    
+    //default sorting to beer name
+    if (!$stateParams.sort || $stateParams.sort == ""){
+        $stateParams.sort = 'name';
+        
+        $state.go('Search', {
+            beer: $stateParams.beer,
+            brewery: $stateParams.brewery,
+            style: $stateParams.style,
+            sort: $stateParams.sort
+        }, {
+            notify: false,
+            location: "replace"
+        });
+        
+    };
+    
     $scope.sorting = $stateParams.sort;
     $scope.filter.brewery = {};
     $scope.filter.style = {};

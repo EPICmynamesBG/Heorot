@@ -197,7 +197,7 @@ class Beer {
     
     public static function getAll() {
         $db = DB::getInstance();
-        $results = $db->select('Beer','*',[]);
+        $results = $db->select('Beer','*',["ORDER" => "name"]);
         
         if (sizeof($results) == 0 || !$results){
           return array();
