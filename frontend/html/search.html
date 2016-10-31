@@ -1,51 +1,61 @@
 <div class="spacer"></div>
 <div class="section white search-section">
-  <div class="row search-table-container">
-    <table class="striped highlight responsive-table">
-      <thead>
-        <tr>
-          <th data-field="id">
-            <a ng-click="sortBy('name')" ng-if="sorting == 'name'">&#x25BE;</a>
-            <a ng-click="sortBy('name')" ng-if="sorting == '-name'">&#x25B4;</a>
-            <a ng-click="sortBy('name')" ng-if="sorting != '-name' && sorting != 'name'">&#x25A1;</a>
-            <input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('beer')" ng-show="filter.name.length > 0">close</i></th>
-          <th data-field="style">
-            <a ng-click="sortBy('style.name')" ng-if="sorting == 'style.name'">&#x25BE;</a>
-            <a ng-click="sortBy('style.name')" ng-if="sorting == '-style.name'">&#x25B4;</a>
-            <a ng-click="sortBy('style.name')" ng-if="sorting != '-style.name' && sorting != 'style.name'">&#x25A1;</a>
-            <input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('style')" ng-show="filter.style.name.length > 0">close</i></th>
-          <th data-field="cost" ng-click="sortBy('cost')">
-            <a ng-if="sorting == 'cost'">&#x25BE;</a>
-            <a ng-if="sorting == '-cost'">&#x25B4;</a> Cost
-          </th>
-          <th data-field="brewery">
-            <a ng-click="sortBy('brewery.name')" ng-if="sorting == 'brewery.name'">&#x25BE;</a>
-            <a ng-click="sortBy('brewery.name')" ng-if="sorting == '-brewery.name'">&#x25B4;</a>
-            <a ng-click="sortBy('brewery.name')" ng-if="sorting != '-brewery.name' && sorting != 'brewery.name'">&#x25A1;</a>
-            <input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('brewery')" ng-show="filter.brewery.name.length > 0">close</i></th>
-          <th data-field="ibu" ng-click="sortBy('ibu')">
-            <a ng-if="sorting == 'ibu'">&#x25BE;</a>
-            <a ng-if="sorting == '-ibu'">&#x25B4;</a> IBU
-          </th>
-          <th data-field="abv" ng-click="sortBy('abv')">
-            <a ng-if="sorting == 'abv'">&#x25BE;</a>
-            <a ng-if="sorting == '-abv'">&#x25B4;</a> ABV
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="beer in beerList | filter:filter | orderBy: sorting" ng-click="viewBeer(beer.id)">
-          <td>{{beer.name}}</td>
-          <td>{{beer.style.name}}</td>
-          <td>{{beer.cost | currency:"$":2}}</td>
-          <td>{{beer.brewery.name}}</td>
-          <td>{{beer.ibu}}</td>
-          <td>{{beer.abv}}%</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="row search-table-container">
+        <table class="striped highlight responsive-table" id="beer-table">
+            <thead class="search-table-head" id="sticky-scroll">
+                <tr>
+                    <th data-field="id" class="wide">
+                        <a ng-click="sortBy('name')" ng-if="sorting == 'name'">&#x25BE;</a>
+                        <a ng-click="sortBy('name')" ng-if="sorting == '-name'">&#x25B4;</a>
+                        <a ng-click="sortBy('name')" ng-if="sorting != '-name' && sorting != 'name'">&#x25A1;</a>
+                        <input placeholder="Name" id="beer-name" type="text" class="inline" ng-model="filter.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('beer')" ng-show="filter.name.length > 0">close</i></th>
+                    <th data-field="style" class="wide">
+                        <a ng-click="sortBy('style.name')" ng-if="sorting == 'style.name'">&#x25BE;</a>
+                        <a ng-click="sortBy('style.name')" ng-if="sorting == '-style.name'">&#x25B4;</a>
+                        <a ng-click="sortBy('style.name')" ng-if="sorting != '-style.name' && sorting != 'style.name'">&#x25A1;</a>
+                        <input placeholder="Style" id="style-name" type="text" class="inline" ng-model="filter.style.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('style')" ng-show="filter.style.name.length > 0">close</i></th>
+                    <th data-field="cost" ng-click="sortBy('cost')" class="narrow">
+                        <a ng-if="sorting == 'cost'">&#x25BE;</a>
+                        <a ng-if="sorting == '-cost'">&#x25B4;</a> Cost
+                    </th>
+                    <th data-field="brewery" class="wide">
+                        <a ng-click="sortBy('brewery.name')" ng-if="sorting == 'brewery.name'">&#x25BE;</a>
+                        <a ng-click="sortBy('brewery.name')" ng-if="sorting == '-brewery.name'">&#x25B4;</a>
+                        <a ng-click="sortBy('brewery.name')" ng-if="sorting != '-brewery.name' && sorting != 'brewery.name'">&#x25A1;</a>
+                        <input placeholder="Brewery" id="brew-name" type="text" class="inline" ng-model="filter.brewery.name" ng-change="applyFilter()" /><i class="material-icons" ng-click="clearFilter('brewery')" ng-show="filter.brewery.name.length > 0">close</i></th>
+                    <th data-field="ibu" ng-click="sortBy('ibu')" class="narrow">
+                        <a ng-if="sorting == 'ibu'">&#x25BE;</a>
+                        <a ng-if="sorting == '-ibu'">&#x25B4;</a> IBU
+                    </th>
+                    <th data-field="abv" ng-click="sortBy('abv')" class="narrow">
+                        <a ng-if="sorting == 'abv'">&#x25BE;</a>
+                        <a ng-if="sorting == '-abv'">&#x25B4;</a> ABV
+                    </th>
+                </tr>
+            </thead>
+            <thead id="sticky-spacer" class="search-table-spacer">
+                <td class="wide"></td>
+                <td class="wide"></td>
+                <td class="narrow"></td>
+                <td class="wide"></td>
+                <td class="narrow"></td>
+                <td class="narrow"></td>
+            </thead>
+            <tbody class="beer-table-body">
+                <tr ng-repeat="beer in beerList | filter:filter | orderBy: sorting" ng-click="viewBeer(beer.id)">
+                    <td class="wide">{{beer.name}}</td>
+                    <td class="wide">{{beer.style.name}}</td>
+                    <td class="narrow">{{beer.cost | currency:"$":2}}</td>
+                    <td class="wide">{{beer.brewery.name}}</td>
+                    <td class="narrow">{{beer.ibu}}</td>
+                    <td class="narrow">{{beer.abv}}%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <div class="spacer"></div>
 <beer-modal data="beerModalData"></beer-modal>
+
+
+<script src="./scripts/custom/stickyScroll.js" type="text/javascript"></script>

@@ -1,106 +1,184 @@
-.search-parallax-container {
-  height: 110px;
-}
-
 .search-section {
-  min-height: 335px;
+    min-height: 335px;
 }
 
 .search-table-container {
-  margin: 0 auto;
-  width: 90%;
+    margin: 0 auto;
+    width: 90%;
+}
+
+#beer-table, 
+.beer-table-body {
+    table-layout: fixed;
+}
+
+#beer-table thead th.wide,
+#beer-table tbody td.wide,
+#sticky-spacer td.wide {
+    width: calc(85% / 3.0);
+}
+
+#beer-table thead th.narrow,
+#beer-table tbody td.narrow,
+#sticky-spacer td.narrow {
+    table-layout: fixed;
+    max-width: 50px;
+    width: 5%;
+    min-width: 40px;
+}
+
+.search-table-head.stuck {
+    position: fixed;
+    display: table;
+    margin: 0px auto;
+    width: 90%;
+    top: 64px;
+    left: 45%;
+    transform: translateX(-45%);
+    /*    height: 55px;*/
+    background-color: white;
+    margin: 0 auto;
+}
+
+
+.search-table-spacer {
+    position: relative;
+    display: none;
+    height: 55px;
+}
+
+.search-table-spacer.active {
+    display: table-header-group;
+    vertical-align: middle;
+    width: 100%;
+}
+
+@media only screen and (max-width: 992px) {
+    #beer-table thead th,
+    #beer-table tbody td {
+        width: auto !important;
+        max-width: 200px !important;
+        min-width: 0px !important;
+    }
+    
+    #sticky-spacer {
+        display: none;
+    }
 }
 
 .modal-beer-logo {
-  position: absolute;
-  right: 20px;
-  top: 12px;
-  height: 50px;
-  width: 50px;
-  overflow: hidden;
-  border-radius: 100%;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.12);
-  background-color: transparent;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 100%;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.12);
+    background-color: transparent;
 }
 
 .modal-beer-logo > img {
-  max-width: 100%;
-  max-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 i.info {
-  font-size: 7px;
-  line-height: 3rem;
-  font-weight: 100;
-  width: auto;
+    font-size: 7px;
+    line-height: 3rem;
+    font-weight: 100;
+    width: auto;
 }
 
 ul.collapsible .row h4 {
-  margin-top: 10px;
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-left: 30px;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-left: 30px;
 }
 
 table thead tr th {
-  position: relative;
+    position: relative;
 }
 
 table input.inline {
-  display: inline-block;
-  width: auto;
-  margin: auto 0 auto 10px;
-  height: 1.2rem;
-  font-size: 1rem;
-  color: #607d8b;
+    display: inline-block;
+    width: auto;
+    margin: auto 0 auto 10px;
+    height: 1.2rem;
+    font-size: 1rem;
+    color: #607d8b;
 }
 
 table input.inline:focus {
-  color: #ffa000 !important;
-  border-color: #ffc107 !important;
-  box-shadow: 0 1px 0 0 #ffc107 !important;
+    color: #ffa000 !important;
+    border-color: #ffc107 !important;
+    box-shadow: 0 1px 0 0 #ffc107 !important;
 }
 
 beer-modal .more-info-header {
-  padding: 0px 10%;
-  font-size: 1.3rem;
-  line-height: 3rem;
+    padding: 0px 10%;
+    font-size: 1.3rem;
+    line-height: 3rem;
 }
 
 beer-modal .modal-brew-logo {
-  height: 80px;
-  width: 80px;
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  border-radius: 100%;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.12);
-  background-color: transparent;
-  margin: 5px;
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.12);
+    background-color: transparent;
+    margin: 5px;
 }
 
 beer-modal .modal-brew-logo > img {
-  max-height: 100%;
-  max-width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+beer-modal .info-for {
+    font-weight: 300;
+    font-size: 0.9rem;
+    margin-left: 7px;
+}
+
+@media screen and (max-width: 1024px) {
+    table input.inline {
+        max-width: 110px;
+    }
 }
 
 @media screen and (max-width: 425px) {
-  table input.inline {
-    width: 70px;
-  }
-  beer-modal .row .col.s6 > p {
-    padding: 0.5rem;
-  }
-  
-  beer-modal .modal {
-    max-height: 85%;
-    width: 95%;
-  }
-  
-  beer-modal .modal.modal-fixed-footer {
-    height: 85%;
-    top: 7% !important;
-  }
+    table input.inline {
+        width: 70px;
+    }
+    beer-modal .row .col.s6 > p {
+        padding: 0.5rem;
+    }
+    beer-modal .modal {
+        max-height: 85%;
+        width: 95%;
+    }
+    beer-modal .modal.modal-fixed-footer {
+        height: 85%;
+        top: 7% !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    table.responsive-table tbody tr {
+        max-width: 200px;
+        overflow: hidden;
+    }
+    
+    table.responsive-table tbody tr td {
+        text-overflow: ellipsis;
+        max-width: 200px;
+        overflow: hidden;
+    }
 }
 
 

@@ -41,10 +41,6 @@ class BreweryDB {
         }
 
         $parsed = $this->parseTopResult($response, $beerName);
-        
-        if ($parsed['name'] != $beerName) {
-          return null;
-        }
       
         return $parsed;
     }
