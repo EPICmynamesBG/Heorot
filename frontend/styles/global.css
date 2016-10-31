@@ -32,6 +32,10 @@ body {
   outline: none;
 }
 
+#sidenav-overlay {
+  z-index: 995;
+}
+
 /* Sticky Footer */
 
 main {
