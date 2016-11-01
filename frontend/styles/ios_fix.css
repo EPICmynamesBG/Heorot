@@ -1,0 +1,4 @@
+#sidenav-overlay {
+    transform: translateX(300px);
+    transition-timing-function: ease-in;
+}

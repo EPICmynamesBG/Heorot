@@ -15,7 +15,7 @@ body {
   background-image: url(../assets/images/beer_texture.jpg);
   background-size: cover;
   height: 100%;
-  overflow: auto;
+/*  overflow: auto;*/
   -webkit-overflow-scrolling: touch;
   /* Sticky Footer */
   display: flex;
@@ -24,17 +24,26 @@ body {
 }
 
 #scroll-wrapper {
-    height: 100%;
+    height: calc(100% - 64px - 50px);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-width: 992px) {
+    #scroll-wrapper {
+        height: calc(100% - 56px - 50px);
+    }
 }
 
 *:focus {
   outline: none;
 }
 
+/*
 #sidenav-overlay {
   z-index: 995;
 }
+*/
 
 /* Sticky Footer */
 

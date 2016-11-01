@@ -27,10 +27,11 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
 
     $scope.beerList = [];
     $scope.beerModalData = {};
+    $rootScope.beerModalData = $scope.beerModalData;
 
     var load = function () {
         $rootScope.loading = true;
-
+        
         API.beer.getAll()
             .then(function (data) {
                 $scope.beerList = data.data.data;
@@ -48,17 +49,20 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
     load();
 
     $scope.viewBeer = function (beerId) {
+        $rootScope.loading = true;
+        
         API.beer.getById(beerId)
             .then(function (data) {
                 $scope.beerModalData = data.data.data;
                 if ($scope.beerModalData.featured != null) {
                   $scope.beerModalData.featured = Date.parse($scope.beerModalData.featured);
                 }
-                console.log($scope.beerModalData);
+//                console.log($scope.beerModalData);
                 $('#beer-modal').openModal();
                 $('.collapsible').collapsible({
                     accordion: false
                 });
+                $rootScope.beerModalData = $scope.beerModalData;
                 $rootScope.loading = false;
             }, function (error) {
                 $rootScope.modalData = {
