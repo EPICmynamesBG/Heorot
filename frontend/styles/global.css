@@ -24,14 +24,14 @@ body {
 }
 
 #scroll-wrapper {
-    height: calc(100% - 64px - 50px);
+    height: calc(100% - 64px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
 @media screen and (max-width: 992px) {
     #scroll-wrapper {
-        height: calc(100% - 56px - 50px);
+        height: calc(100% - 56px);
     }
 }
 

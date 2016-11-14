@@ -33,8 +33,8 @@
     margin: 0px auto;
     width: 90%;
     top: 64px;
-    left: 45%;
-    transform: translateX(-45%);
+    left: 50%;
+    transform: translateX(-50%);
     /*    height: 55px;*/
     background-color: white;
     margin: 0 auto;
@@ -44,7 +44,10 @@
 .search-table-spacer {
     position: relative;
     display: none;
-    height: 55px;
+}
+
+.search-table-spacer tr {
+  height: 50px;
 }
 
 .search-table-spacer.active {

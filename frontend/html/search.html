@@ -2,6 +2,7 @@
 <div class="section white search-section">
     <div class="row">
         <h5 class="center">Total Beers: {{beerList.length}}</h5>
+        <h6 class="center">Filtered: <i animate-number-on-change="filtered.length"></i></h6>
     </div>
     <div class="row search-table-container">
         <table class="striped highlight responsive-table" id="beer-table">
@@ -45,7 +46,7 @@
                 <td class="narrow"></td>
             </thead>
             <tbody class="beer-table-body">
-                <tr ng-repeat="beer in beerList | filter:filter | orderBy: sorting" ng-click="viewBeer(beer.id)">
+                <tr ng-repeat="beer in filtered = (beerList | filter:filter | orderBy: sorting)" ng-click="viewBeer(beer.id)">
                     <td class="wide">{{beer.name}}</td>
                     <td class="wide">{{beer.style.name}}</td>
                     <td class="narrow">{{beer.cost | currency:"$":2}}</td>
@@ -60,3 +61,4 @@
 <div class="spacer"></div>
 
 <script src="./scripts/custom/stickyScroll.js" type="text/javascript"></script>
+<!--<script src="./scripts/custom/animate-count.js" type="text/javascript"></script>-->
