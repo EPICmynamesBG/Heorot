@@ -1,103 +1,111 @@
-<div class="section white">
-    <div class="row container">
-        <h2 class="header">Add a Beer &#127866;</h2>
-        <p class="grey-text text-darken-3 lighten-3">The Heorot have something new that's not here? Add it! Just fill out the form below with as much information as you can, as given from The Heorot's menu.</p>
+<div id="create-body">
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header">Add a Beer &#127866;</h2>
+            <p class="grey-text text-darken-3 lighten-3">The Heorot have something new that's not here? Add it! Just fill out the form below with as much information as you can, as given from The Heorot's menu.</p>
+        </div>
     </div>
-</div>
-<div class="section white">
-    <div class="row container">
-        <form novalidate ng-init="newBeer = {}" name="CreateBeer">
-            <div class="section left-on-large">
-                <div class="row">
-                    <div class="input-field col s12" ng-init="newBeer.featured = false;">
-                        <input id="featured" ng-model="newBeer.featured" type="checkbox" class="validate filled-in" autocomplete="off" ng-false-value="false" ng-true-value="true" >
-                        <label for="featured">Featured Beer</label>
+    <div class="section white">
+        <div class="row container">
+            <form novalidate ng-init="newBeer = {}" name="CreateBeer">
+                <div class="section left-on-large">
+                    <div class="row">
+                        <div class="input-field col s12" ng-init="newBeer.featured = false;">
+                            <input id="featured" ng-model="newBeer.featured" type="checkbox" class="validate filled-in" autocomplete="off" ng-false-value="false" ng-true-value="true">
+                            <label for="featured">Featured Beer</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="name" ng-model="newBeer.name" type="text" class="validate autocomplete" autocomplete="off" required ng-change="autocompleteChange('name')">
+                            <label for="name" data-error="Input Invalid">Name</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Budweiser"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="cost" ng-model="newBeer.cost" type="number" class="validate" autocomplete="off" required step="0.01" min="0">
+                            <label for="cost" data-error="Input Invalid">Cost</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: $4.75"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="size" ng-model="newBeer.size" type="text" class="validate" autocomplete="off">
+                            <label for="size" data-error="Input Invalid">Size (Optional)</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: draught pint or 12oz"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider hide-on-large"></div>
+                <div class="section right-on-large">
+                    <h4 class="header">Brewery (Optional)</h4>
+                    <div class="row">
+                        <div class="input-field col s12" ng-init="newBeer.brewery = {}">
+                            <input id="brew-name" ng-model="newBeer.brewery.name" type="text" class="validate autocomplete" autocomplete="off" ng-change="autocompleteChange('brew-name')">
+                            <label for="brew-name" data-error="Input Invalid">Name</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Anheuser-Busch"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12" ng-init="newBeer.brewery = {}">
+                            <input id="brew-location" ng-model="newBeer.brewery.location" type="text" class="validate autocomplete" autocomplete="off" ng-change="autocompleteChange('brew-location')">
+                            <label for="brew-location" data-error="Input Invalid">Location (Optional)</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: St. Louis, MO"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider hide-on-large"></div>
+                <div class="section right-on-large">
+                    <h4 class="header">Style</h4>
+                    <div class="row" ng-init="newBeer.style = {}">
+                        <div class="input-field col s12" ng-init="newBeer.style = {}">
+                            <input id="style" ng-model="newBeer.style.name" type="text" class="validate autocomplete" required autocomplete="off" ng-change="autocompleteChange('style')">
+                            <label for="style" data-error="Input Invalid">Style</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: India Pale Ale (IPA)"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider hide-on-large"></div>
+                <div class="section left-on-large">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="ibu" ng-model="newBeer.ibu" type="number" class="validate" autocomplete="off" step="1" min="0">
+                            <label for="ibu" data-error="Input Invalid">IBU (Optional)</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="International Bitterness Unit. Ex: 60"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="ibu" ng-model="newBeer.abv" type="number" class="validate" autocomplete="off" step="0.1" min="0">
+                            <label for="ibu" data-error="Input Invalid">ABV (Optional)</label>
+                            <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Alcohol by Volume. Ex: 5.5%"><i class="material-icons small text-amber">info</i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description" class="materialize-textarea" ng-enter="submit()" ng-model="newBeer.description"></textarea>
+                            <label for="description" data-error="Input Invalid">Beer Description (Optional)</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="name" ng-model="newBeer.name" type="text" class="validate autocomplete" autocomplete="off" required ng-change="autocompleteChange('name')">
-                        <label for="name" data-error="Input Invalid">Name</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Budweiser"><i class="material-icons small text-amber">info</i></a>
+                        <button class="btn red darken-1 waves-effect waves-light left" type="reset" name="reset">Reset
+                            <i class="material-icons left">clear</i>
+                        </button>
+                        <button class="btn teal darken-1 waves-effect waves-light right" type="submit" ng-click="submit()" ng-disabled="CreateBeer.$invalid || $root.loading" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="cost" ng-model="newBeer.cost" type="number" class="validate" autocomplete="off" required step="0.01" min="0">
-                        <label for="cost" data-error="Input Invalid">Cost</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: $4.75"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="size" ng-model="newBeer.size" type="text" class="validate" autocomplete="off">
-                        <label for="size" data-error="Input Invalid">Size (Optional)</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: draught pint or 12oz"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="divider hide-on-large"></div>
-            <div class="section right-on-large">
-                <h4 class="header">Brewery (Optional)</h4>
-                <div class="row">
-                    <div class="input-field col s12" ng-init="newBeer.brewery = {}">
-                        <input id="brew-name" ng-model="newBeer.brewery.name" type="text" class="validate autocomplete" autocomplete="off" ng-change="autocompleteChange('brew-name')">
-                        <label for="brew-name" data-error="Input Invalid">Name</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: Anheuser-Busch"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12" ng-init="newBeer.brewery = {}">
-                        <input id="brew-location" ng-model="newBeer.brewery.location" type="text" class="validate autocomplete" autocomplete="off" ng-change="autocompleteChange('brew-location')">
-                        <label for="brew-location" data-error="Input Invalid">Location (Optional)</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: St. Louis, MO"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="divider hide-on-large"></div>
-            <div class="section right-on-large">
-                <h4 class="header">Style</h4>
-                <div class="row" ng-init="newBeer.style = {}">
-                    <div class="input-field col s12" ng-init="newBeer.style = {}">
-                        <input id="style" ng-model="newBeer.style.name" type="text" class="validate autocomplete" required autocomplete="off" ng-change="autocompleteChange('style')">
-                        <label for="style" data-error="Input Invalid">Style</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Ex: India Pale Ale (IPA)"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="divider hide-on-large"></div>
-            <div class="section left-on-large">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="ibu" ng-model="newBeer.ibu" type="number" class="validate" autocomplete="off" step="1" min="0">
-                        <label for="ibu" data-error="Input Invalid">IBU (Optional)</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="International Bitterness Unit. Ex: 60"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="ibu" ng-model="newBeer.abv" type="number" class="validate" autocomplete="off" step="0.1" min="0">
-                        <label for="ibu" data-error="Input Invalid">ABV (Optional)</label>
-                        <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Alcohol by Volume. Ex: 5.5%"><i class="material-icons small text-amber">info</i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="description" class="materialize-textarea" ng-enter="submit()" ng-model="newBeer.description"></textarea>
-                        <label for="description" data-error="Input Invalid">Beer Description (Optional)</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn red darken-1 waves-effect waves-light left" type="reset" name="reset">Reset
-                        <i class="material-icons left">clear</i>
-                    </button>
-                    <button class="btn teal darken-1 waves-effect waves-light right" type="submit" ng-click="submit()" ng-disabled="CreateBeer.$invalid || $root.loading" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
+    </div>
+    <div class="offline-cover" ng-if="$root.offline">
+        <div class="center">
+            <h2>Offline</h2>
+            <p>The create form is disabled while offline. Go back online to enable it.</p>
+        </div>
     </div>
 </div>

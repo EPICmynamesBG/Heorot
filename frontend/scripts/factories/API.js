@@ -1,4 +1,4 @@
-app.factory('API', ['config', '$http', function (config, $http) {
+app.factory('API', ['config', '$http', '$rootScope', 'CacheFactory', function (config, $http, $rootScope, CacheFactory) {
 
     var factory = {};
 
@@ -6,11 +6,39 @@ app.factory('API', ['config', '$http', function (config, $http) {
     var brewery = {};
     var parser = {};
     var style = {};
+
+    if (!CacheFactory.get('beerCache')) {
+        CacheFactory.createCache('beerCache', {});
+    }
+    var beerCache = CacheFactory.get('beerCache');
+
+    if (!CacheFactory.get('breweryCache')) {
+        CacheFactory.createCache('breweryCache', {});
+    }
+    var breweryCache = CacheFactory.get('breweryCache');
+
+    if (!CacheFactory.get('styleCache')) {
+        CacheFactory.createCache('styleCache', {});
+    }
+    var styleCache = CacheFactory.get('styleCache');
+
+    var offlineError = function () {
+        return new Promise(function (resolve, reject) {
+            reject(new Error("Offline", {
+                config: null,
+                data: null,
+                headers: null,
+                status: -1,
+                statusText: 'Offline'
+            }));
+        });
+    }
+
     parser.brewery = {};
 
     parser.namesForAutocomplete = function (dataArray) {
         var parsed = {};
-        if (dataArray.length == 0){
+        if (dataArray.length == 0) {
             return parsed;
         }
         dataArray.forEach(function (item) {
@@ -22,7 +50,7 @@ app.factory('API', ['config', '$http', function (config, $http) {
 
     parser.brewery.locationsForAutocomplete = function (dataArray) {
         var parsed = {};
-        if (dataArray.length == 0){
+        if (dataArray.length == 0) {
             return parsed;
         }
         dataArray.forEach(function (item) {
@@ -35,18 +63,24 @@ app.factory('API', ['config', '$http', function (config, $http) {
     beer.getAll = function () {
         return $http({
             method: 'GET',
-            url: config.url + '/beers'
+            url: config.url + '/beers',
+            cache: beerCache
         });
     };
 
     beer.getById = function (id) {
         return $http({
             method: 'GET',
-            url: config.url + '/beer/' + id
+            url: config.url + '/beer/' + id,
+            cache: beerCache
         });
     };
 
     beer.create = function (beerData) {
+        if ($rootScope.offline) {
+            return offlineError();
+        }
+
         return $http({
             method: 'POST',
             url: config.url + '/beer',
@@ -60,21 +94,24 @@ app.factory('API', ['config', '$http', function (config, $http) {
     brewery.getAll = function () {
         return $http({
             method: 'GET',
-            url: config.url + '/breweries'
+            url: config.url + '/breweries',
+            cache: breweryCache
         });
     };
 
     brewery.getById = function (brewId) {
         return $http({
             method: 'GET',
-            url: config.url + '/brewery/' + brewId
+            url: config.url + '/brewery/' + brewId,
+            cache: breweryCache
         });
-    };
+    }
 
     style.getAll = function () {
         return $http({
             method: 'GET',
-            url: config.url + '/styles'
+            url: config.url + '/styles',
+            cache: styleCache
         });
     };
 

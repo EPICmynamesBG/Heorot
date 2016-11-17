@@ -1,0 +1,107 @@
+CACHE MANIFEST
+
+# Learn more:
+# https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache
+
+# -----------------------------------------------------------------------------
+
+# It's necessary to tell web browsers to reconsider this manifest any time the
+# website is updated, and you do so by changing *anything* inside the manifest.
+# A common way to do this is by simply updating a commented-out string, like a
+# date or a version number, or both:
+
+# 2016-11-17:v1.0.0
+
+# -----------------------------------------------------------------------------
+
+# This is where you define all of the resources to be cached. Add new and/or
+# remove old resourses as needed, keeping each one on its own line. Learn more:
+# https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache#Explicit_entries
+
+CACHE:
+./manifest.json
+
+./index.html
+
+./html/create.html
+./html/directives/beerModal.html
+./html/directives/loading.html
+./html/directives/modal.html
+./html/main.html
+./html/search.html
+
+./node_modules/materialize-css/dist/css/materialize.css
+./styles/create.css
+./styles/global.css
+./styles/ios_fix.css
+./styles/main.css
+./styles/search.css
+
+https://fonts.googleapis.com/icon?family=Material+Icons
+https://fonts.gstatic.com/s/materialicons/v18/2fcrYFNaTjcS6g4U3t-Y5RV6cRhDpPC5P4GCEJpqGoc.woff
+
+https://fonts.googleapis.com/css?family=Raleway:200,400,700&subset=latin-ext
+https://fonts.gstatic.com/s/raleway/v11/cbAbzEjxTdN5KKmS-gA0tb3hpw3pgy2gAi-Ip7WPMi0.woff
+https://fonts.gstatic.com/s/raleway/v11/KZIBeBMugm8Hv3hZPrGeCwLUuEpTyoUstqEm5AMlJo4.woff
+https://fonts.gstatic.com/s/raleway/v11/WmVKXVcOuffP_qmCpFuyzb3hpw3pgy2gAi-Ip7WPMi0.woff
+
+./assets/fonts/MaterialIcons/MaterialIcons.css
+./assets/fonts/MaterialIcons/Material-Icons.woff2
+
+./assets/fonts/Raleway/Raleway.css
+./assets/fonts/Raleway/Raleway-ExtraLight.woff
+./assets/fonts/Raleway/Raleway-Normal.woff
+./assets/fonts/Raleway/Raleway-Bold.woff
+
+./assets/images/beer_texture.jpg
+./assets/images/clinking-beer-mugs.png
+./assets/images/icon.png
+./assets/images/splash.png
+
+./node_modules/jquery/dist/jquery.min.js
+./scripts/custom/materialize-css-custom.js
+./node_modules/angular/angular.min.js
+./node_modules/angular-ui-router/release/angular-ui-router.min.js
+./node_modules/angular-cache/dist/angular-cache.min.js
+
+./scripts/app.js
+
+./scripts/controllers/CreateController.js
+./scripts/controllers/MainController.js
+./scripts/controllers/NavController.js
+./scripts/controllers/SearchController.js
+
+
+./scripts/custom/stickyScroll.js
+
+./scripts/directives/animateNumberOnChange.js
+./scripts/directives/beerModal.js
+./scripts/directives/loading.js
+./scripts/directives/modal.js
+./scripts/directives/ngEnter.js
+
+./scripts/factories/API.js
+./scripts/factories/Helper.js
+
+./scripts/services/Search.js
+
+# -----------------------------------------------------------------------------
+
+# Resources that must be retrieved from the network. The wild card ensures any
+# resource not listed in the cache above will instead be downloaded from the
+# network. Learn more:
+# https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache#Network_entries
+
+NETWORK:
+*
+
+# -----------------------------------------------------------------------------
+
+# Fallbacks. In each row, if the first resource isn't available, the second
+# resource is requested. Uncomment and update as needed. Learn more:
+# https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache#Fallback_entries
+
+FALLBACK:
+# / offline.html
+# /desired.html /fallback.html
+# /images/desired.jpg /images/fallback.jpg

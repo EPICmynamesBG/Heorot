@@ -1,11 +1,11 @@
 app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$stateParams', function ($scope, $state, API, $rootScope, $stateParams) {
 
     $scope.filter = {};
-    
+
     //default sorting to beer name
-    if (!$stateParams.sort || $stateParams.sort == ""){
+    if (!$stateParams.sort || $stateParams.sort == "") {
         $stateParams.sort = 'name';
-        
+
         $state.go('Search', {
             beer: $stateParams.beer,
             brewery: $stateParams.brewery,
@@ -15,9 +15,9 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
             notify: false,
             location: "replace"
         });
-        
+
     };
-    
+
     $scope.sorting = $stateParams.sort;
     $scope.filter.brewery = {};
     $scope.filter.style = {};
@@ -31,7 +31,7 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
 
     var load = function () {
         $rootScope.loading = true;
-        
+
         API.beer.getAll()
             .then(function (data) {
                 $scope.beerList = data.data.data;
@@ -50,14 +50,14 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
 
     $scope.viewBeer = function (beerId) {
         $rootScope.loading = true;
-        
+
         API.beer.getById(beerId)
             .then(function (data) {
                 $scope.beerModalData = data.data.data;
                 if ($scope.beerModalData.featured != null) {
-                  $scope.beerModalData.featured = Date.parse($scope.beerModalData.featured);
+                    $scope.beerModalData.featured = Date.parse($scope.beerModalData.featured);
                 }
-//                console.log($scope.beerModalData);
+                //                console.log($scope.beerModalData);
                 $('#beer-modal').openModal();
                 $('.collapsible').collapsible({
                     accordion: false
@@ -65,9 +65,19 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
                 $rootScope.beerModalData = $scope.beerModalData;
                 $rootScope.loading = false;
             }, function (error) {
+                var temp = {
+                    title: 'Error: -1',
+                    description: 'Unable to load while offline'
+                }
+                if (error && error.data) {
+                    temp = {
+                        title: 'Error: ' + error.data.status,
+                        description: error.data.msg
+                    };
+                }
                 $rootScope.modalData = {
-                    title: 'Error: ' + error.data.status,
-                    description: error.data.msg
+                    title: temp.title,
+                    description: temp.description
                 };
                 $('#modal').openModal();
                 $rootScope.loading = false;
@@ -105,12 +115,12 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
             location: "replace"
         });
     };
-  
-    $scope.sortBy = function(sortType) {
+
+    $scope.sortBy = function (sortType) {
         if ($scope.sorting == sortType) {
-          $scope.sorting = "-" + sortType;
+            $scope.sorting = "-" + sortType;
         } else {
-          $scope.sorting = sortType;
+            $scope.sorting = sortType;
         }
         $state.go('Search', {
             beer: $scope.filter.name,
@@ -128,6 +138,26 @@ app.controller('SearchController', ['$scope', '$state', 'API', '$rootScope', '$s
         $scope.viewBeer($state.current.data.beerId);
         $state.current.data.showModal = false;
         $state.current.data.beerId = -1;
+    }
+
+
+
+    // TEMP: Offline fix for sticky header load issue
+    if ($rootScope.offline) {
+        var obj = $("#sticky-scroll");
+        var spacer = $("#sticky-spacer");
+        var wrapper = $('#scroll-wrapper');
+
+        wrapper.on("scroll", function (e) {
+            if (wrapper.scrollTop() > 189 && $(window).width() > 992) {
+                obj.addClass("stuck");
+                spacer.addClass('active');
+            } else {
+                obj.removeClass("stuck");
+                spacer.removeClass('active');
+            }
+
+        });
     }
 
 }]);

@@ -1,0 +1,15 @@
+{
+    "short_name": "Heorot",
+    "name": "The Heorot",
+    "start_url": "./?utm_source=web_app_manifest",
+    "icons": [
+        {
+            "src": "./assets/images/icon.png",
+            "sizes": "152x152",
+            "type": "image/png"
+    }
+  ],
+    "background_color": "#ff8f00",
+    "theme_color": "#ffc107",
+    "display": "standalone"
+}

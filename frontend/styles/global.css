@@ -1,43 +1,43 @@
-@import 'https://fonts.googleapis.com/css?family=Raleway:200,400,700&subset=latin-ext';
 * {
-  margin: 0;
-  padding: 0;
-  font-family: 'Raleway', sans-serif;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
 }
 
 html {
-  overflow: hidden;
-  height: 100%;
+    overflow: hidden;
+    height: 100%;
 }
 
 body {
-  background-image: url(../assets/images/beer_texture.jpg);
-  background-size: cover;
-  height: 100%;
-/*  overflow: auto;*/
-  -webkit-overflow-scrolling: touch;
-  /* Sticky Footer */
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    background-image: url(../assets/images/beer_texture.jpg);
+    background-size: cover;
+    height: 100%;
+    /*  overflow: auto;*/
+    -webkit-overflow-scrolling: touch;
+    /* Sticky Footer */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 #scroll-wrapper {
-    height: calc(100% - 64px);
+    height: calc(100% - 64px - 40px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
 @media screen and (max-width: 992px) {
     #scroll-wrapper {
-        height: calc(100% - 56px);
+        height: calc(100% - 56px - 40px);
     }
 }
 
 *:focus {
-  outline: none;
+    outline: none;
 }
+
 
 /*
 #sidenav-overlay {
@@ -45,183 +45,202 @@ body {
 }
 */
 
+
 /* Sticky Footer */
 
 main {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 nav .brand-logo {
-  font-size: 3.5rem;
+    font-size: 3.5rem;
 }
 
 nav ul,
 nav ul:not(.side-nav) > li {
-  height: 100%;
+    height: 100%;
 }
 
 nav input#search {
-  width: 260px;
+    width: 260px;
 }
 
 nav input#search:focus {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .custom-search,
 nav input#search {
-  transition: 0.3s;
+    transition: 0.3s;
 }
 
 nav .button-collapse {
-  margin-left: 32px;
+    margin-left: 32px;
 }
 
 *[ng-click] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .spacer {
-  height: 6rem;
-  background-color: transparent;
+    height: 6rem;
+    background-color: transparent;
 }
 
 .side-nav li > a > i.text {
-  line-height: 48px;
-  float: none;
-  display: inline-block;
-  font-family: 'Raleway';
-  color: #212121;
-  font-style: normal;
-  font-size: 1rem;
-  vertical-align: top;
+    line-height: 48px;
+    float: none;
+    display: inline-block;
+    font-family: 'Raleway';
+    color: #212121;
+    font-style: normal;
+    font-size: 1rem;
+    vertical-align: top;
 }
 
 .text-amber {
-  color: #ffc107;
+    color: #ffc107;
 }
 
 input#search {
-  color: #607d8b !important;
-  position: relative;
+    color: #607d8b !important;
+    position: relative;
 }
 
 .search-loading {
-  position: absolute;
-  left: 6px;
-  top: 42px;
+    position: absolute;
+    left: 6px;
+    top: 42px;
 }
 
 .search-dropdown {
-  
-  background-color: #fff;
-  margin: 0;
-  display: none;
-  min-width: 100px;
-  max-height: 650px;
-  overflow-y: auto;
-  opacity: 0;
-  position: absolute;
-  z-index: 999;
-  will-change: width, height;
-  margin-top: -15px;
-  display: block;
-  opacity: 1;
-  position: static;
+    background-color: #fff;
+    margin: 0;
+    display: none;
+    min-width: 100px;
+    max-height: 650px;
+    overflow-y: auto;
+    opacity: 0;
+    position: absolute;
+    z-index: 999;
+    will-change: width, height;
+    margin-top: -15px;
+    display: block;
+    opacity: 1;
+    position: static;
 }
 
 .search-dropdown li {
-  position: relative;
-  clear: both;
-  color: rgba(0, 0, 0, 0.87);
-  cursor: pointer;
-  min-height: 50px;
-  line-height: 1.5rem;
-  width: 100%;
-  text-align: left;
-  text-transform: none;
-  z-index: 10;
+    position: relative;
+    clear: both;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+    min-height: 50px;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+    z-index: 10;
 }
 
 .search-dropdown li:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .search-dropdown li > span {
-  font-size: 16px;
-  display: block;
-  line-height: 22px;
-  padding: 14px 16px;
-  color: #ffa000;
+    font-size: 16px;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+    color: #ffa000;
 }
 
 .search-dropdown .material-icons.small {
-  font-size: 1.6rem;
-  height: 1.6rem;
-  line-height: 1.6rem;
-  display: inline-block;
-  position: absolute;
-  right: 12px;
-  top: 12px;
+    font-size: 1.6rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    display: inline-block;
+    position: absolute;
+    right: 12px;
+    top: 12px;
 }
 
 .search-dropdown {
-  transition: height 0.5s;
+    transition: height 0.5s;
 }
 
 .search-dropdown.hidden {
-  height: 0;
+    height: 0;
 }
 
 .search-dropdown.active {
-  height: auto;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  /*  max-height: 350px;*/
+    height: auto;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    /*  max-height: 350px;*/
 }
 
 .side-nav li > a > i.material-icons {
-  float: none;
-  display: inline-block;
-  width: 24px;
-  line-height: 48px;
-  height: 48px;
+    float: none;
+    display: inline-block;
+    width: 24px;
+    line-height: 48px;
+    height: 48px;
 }
 
 a.button-collapse {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .parallax-container {
-  height: 250px;
+    height: 250px;
 }
 
 footer.page-footer {
-  margin-top: 0;
+    margin-top: 0px;
+    padding-top: 10px;
 }
 
 .center {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 @media only screen and (max-width: 992px) {
-  .custom-search {
-    float: none !important;
-    margin-left: 100px;
-  }
-  .custom-search > li {
+    .custom-search {
+        float: none !important;
+        margin-left: 100px;
+    }
+    .custom-search > li {
+        width: 100%;
+    }
+    nav input#search {
+        width: 100%;
+    }
+}
+
+.offline-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
     width: 100%;
-  }
-  nav input#search {
-    width: 100%;
-  }
+    z-index: 800;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.offline-cover * {
+    color: white;
+    text-align: center;
+    padding: 5px;
 }
