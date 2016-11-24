@@ -5,96 +5,101 @@ var prodURL = 'http://dev.brandongroff.com/Heorot/backend/public';
 var devURL = 'http://localhost:8888/Heorot/backend/public';
 
 app.constant('config', {
-    dev: true,
-    url: devURL
+  dev: true,
+  url: devURL
 });
 
 app.run(function ($rootScope, config, $state, $http) {
-    /*  Offline app handling */
+  /*  Offline app handling */
 
-    $rootScope.offline = navigator.onLine ? false : true;
-    $rootScope.$apply();
+  $rootScope.offline = navigator.onLine ? false : true;
+  $rootScope.$apply();
 
-    if (window.addEventListener) {
-        window.addEventListener("online", function () {
-            $rootScope.offline = false;
-            $rootScope.$apply();
-        }, true);
-        window.addEventListener("offline", function () {
-            $rootScope.offline = true;
-            $rootScope.$apply();
-        }, true);
-    } else {
-        document.body.ononline = function () {
-            $rootScope.offline = false;
-            $rootScope.$apply();
-        };
-        document.body.onoffline = function () {
-            $rootScope.offline = true;
-            $rootScope.$apply();
-        };
-    }
+  if (window.addEventListener) {
+    window.addEventListener("online", function () {
+      $rootScope.offline = false;
+      $rootScope.$apply();
+    }, true);
+    window.addEventListener("offline", function () {
+      $rootScope.offline = true;
+      $rootScope.$apply();
+    }, true);
+  } else {
+    document.body.ononline = function () {
+      $rootScope.offline = false;
+      $rootScope.$apply();
+    };
+    document.body.onoffline = function () {
+      $rootScope.offline = true;
+      $rootScope.$apply();
+    };
+  }
 
 
 
-    /* End offline handling */
+  /* End offline handling */
 
-    $rootScope.config = config;
-    $rootScope.$state = $state;
-    $rootScope.loading = false;
-    $rootScope.modalData = {};
-    $rootScope.beerModalData = {};
+  $rootScope.config = config;
+  $rootScope.$state = $state;
+  $rootScope.loading = false;
+  $rootScope.modalData = {};
+  $rootScope.beerModalData = {};
 
-    $(".button-collapse").sideNav({
-        closeOnClick: true
-    });
+  $(".button-collapse").sideNav({
+    closeOnClick: true
+  });
 });
 
 
 /* --- Routing --- */
 
-app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryProvider) {
-    angular.extend(CacheFactoryProvider.defaults, {
-        maxAge: 3600000,
-        deleteOnExpire: 'aggressive',
-        onExpire: function (key, value) {
-            var _this = this; // "this" is the cache in which the item expired
-            angular.injector(['ng']).get('$http').get(key).success(function (data) {
-                _this.put(key, data);
-            });
-        },
-        storageMode: 'localStorage',
-        storagePrefix: 'heorot'
+app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryProvider, $locationProvider) {
+  angular.extend(CacheFactoryProvider.defaults, {
+    maxAge: 3600000,
+    deleteOnExpire: 'aggressive',
+    onExpire: function (key, value) {
+      var _this = this; // "this" is the cache in which the item expired
+      angular.injector(['ng']).get('$http').get(key).success(function (data) {
+        _this.put(key, data);
+      });
+    },
+    storageMode: 'localStorage',
+    storagePrefix: 'heorot'
+  });
+
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: true
+  });
+
+  $urlRouterProvider.otherwise("/");
+
+  $stateProvider
+    .state('Home', {
+      url: '/',
+      templateUrl: "html/main.html",
+      controller: 'MainController',
+      data: {}
+    })
+    .state('Search', {
+      dynamic: true,
+      url: "/search?beer&brewery&style&sort",
+      templateUrl: "html/search.html",
+      controller: 'SearchController',
+      data: {
+        showModal: false,
+        modalBeerId: -1
+      }
+    })
+    .state('Create', {
+      url: "/create",
+      templateUrl: "html/create.html",
+      controller: 'CreateController',
+      data: {
+        beer: null,
+        breweryName: null
+      }
     });
-
-    $urlRouterProvider.otherwise("/");
-
-    $stateProvider
-        .state('Home', {
-            url: '/',
-            templateUrl: "html/main.html",
-            controller: 'MainController',
-            data: {}
-        })
-        .state('Search', {
-            dynamic: true,
-            url: "/search?beer&brewery&style&sort",
-            templateUrl: "html/search.html",
-            controller: 'SearchController',
-            data: {
-                showModal: false,
-                modalBeerId: -1
-            }
-        })
-        .state('Create', {
-            url: "/create",
-            templateUrl: "html/create.html",
-            controller: 'CreateController',
-            data: {
-                beer: null,
-                breweryName: null
-            }
-        });
 });
 
 
@@ -104,7 +109,7 @@ app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryPro
       ******************************************************************* */
 
 window.applicationCache.addEventListener('cached', function () {
-    console.log('Application downloaded. It’s safe to go offline now.');
+  console.log('Application downloaded. It’s safe to go offline now.');
 }, false);
 
 /* *******************************************************************
@@ -117,10 +122,10 @@ occurs when three things happen:
 ******************************************************************* */
 
 window.addEventListener('load', function () {
-    window.applicationCache.addEventListener('updateready', function () {
-        if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-            console.log("Reloading new version");
-            window.location.reload();
-        }
-    }, false);
+  window.applicationCache.addEventListener('updateready', function () {
+    if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+      console.log("Reloading new version");
+      window.location.reload();
+    }
+  }, false);
 }, false);
