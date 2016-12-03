@@ -1,7 +1,7 @@
 <div id="beer-modal" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>{{data.name}}</h4>
-    <span class="modal-beer-logo" ng-if="data.extendedInfo">
+    <span class="modal-beer-logo" ng-if="data.extendedInfo.labels.medium">
       <img ng-src="{{data.extendedInfo.labels.medium}}" />
     </span>
     <div class="divider"></div>
@@ -12,6 +12,9 @@
           <p ng-if="data.description">{{data.description}}</p>
           <p ng-if="!data.description && data.extendedInfo">{{data.extendedInfo.description}}</p>
           <div class="row">
+            <div class="col s12">
+              <p><b>Style:</b> {{data.style.name}}</p>
+            </div>
             <div class="col s12" ng-if="data.featured != null">
               <p>**<b>Featured Brew</b> as of {{data.featured | date:'yyyy-MM-dd'}}**</p>
             </div>
