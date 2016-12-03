@@ -46,13 +46,13 @@
                 <td class="narrow"></td>
             </thead>
             <tbody class="beer-table-body">
-                <tr ng-repeat="beer in ::filtered = (beerList | filter:filter | orderBy: sorting)" ng-click="viewBeer(beer.id)">
+                <tr ng-repeat="beer in filtered = (beerList | filter:filter | orderBy: sorting)" ng-click="viewBeer(beer.id)">
                     <td class="wide">{{::beer.name}}</td>
                     <td class="wide">{{::beer.style.name}}</td>
                     <td class="narrow">{{::beer.cost | currency:"$":2}}</td>
                     <td class="wide">{{::beer.brewery.name}}</td>
                     <td class="narrow">{{::beer.ibu}}</td>
-                    <td class="narrow">{{beer.abv}}%</td>
+                    <td class="narrow">{{::beer.abv}}%</td>
                 </tr>
             </tbody>
         </table>
