@@ -263,3 +263,16 @@ footer.page-footer {
   text-align: center;
   padding: 5px;
 }
+
+#loading-bar .bar {
+  background-color: black !important;
+}
+
+#loading-bar .peg {
+  box-shadow: black 1px 0 6px 1px !important;
+}
+
+#loading-bar-spinner .spinner-icon {
+  border-top-color:  black !important;
+  border-left-color: black !important;
+}

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'angular-cache']);
+var app = angular.module('app', ['ui.router', 'angular-cache','angular-loading-bar']);
 
 var prodURL = 'http://dev.brandongroff.com/Heorot/backend/public';
 //var prodURL = 'http://bgroff-pi2.dhcp.bsu.edu/Heorot/backend/public';
@@ -53,7 +53,7 @@ app.run(function ($rootScope, config, $state, $http) {
 
 /* --- Routing --- */
 
-app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryProvider, $locationProvider, cfpLoadingBarProvider) {
   angular.extend(CacheFactoryProvider.defaults, {
     maxAge: 3600000,
     deleteOnExpire: 'aggressive',
@@ -73,6 +73,9 @@ app.config(function ($stateProvider, $urlRouterProvider, config, CacheFactoryPro
   });
 
   $urlRouterProvider.otherwise("/");
+  
+  cfpLoadingBarProvider.includeSpinner = false;
+  cfpLoadingBarProvider.latencyThreshold = 10;
 
   $stateProvider
     .state('Home', {
